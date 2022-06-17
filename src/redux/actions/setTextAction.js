@@ -1,8 +1,25 @@
-import { SET_TEXT } from "./actionTypes";
+import { SET_VALUE } from "./actionTypes";
+import { SET_LEVEL } from "./actionTypes";
+import { SET_COUNT_NUM} from "./actionTypes";
 
-export const setText = data =>{
+export const setValue = data =>{
    return {
-      type: SET_TEXT,
+      type: SET_VALUE,
       payload: data
    }
 }
+
+export const setLevel = data =>{
+   return {
+      type: SET_LEVEL,
+      payload: data
+   }
+}
+
+export const setCountNum = data =>{
+   return {
+      type: SET_COUNT_NUM,
+      payload: data
+   }
+  
+} 
