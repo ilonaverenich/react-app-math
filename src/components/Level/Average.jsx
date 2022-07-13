@@ -12,13 +12,35 @@ function Average() {
 console.log(randomUnitFirst)
 console.log(randomUnitSecond)
  */
-
+  let result ={
+    resultValue1 :'',
+    resultValue2: '',
+    resultValue3: ''
+  };
   const dispatch = useDispatch();
   const user = useSelector((store)=> store.userValue)
   const randomNumber = useSelector((store)=>store.randomNumber)
   const unit = useSelector((store)=>store.unit)
-  console.log(randomNumber)
-  console.log(unit)
+/*   console.log(randomNumber)
+  console.log(unit) */
+
+  let metrix ={
+    мм: 1,
+    см:10,
+    дм:100,
+    м:1000,
+    км:1000000
+}
+console.log('-------',metrix[unit.randomUnitFirst])
+
+if (metrix[unit.randomUnitMain]> metrix[unit.randomUnitFirst]){
+  result.resultValue1 = randomNumber * (metrix[unit.randomUnitMain]/metrix[unit.randomUnitFirst]);
+  result.resultValue2 = randomNumber * (metrix[unit.randomUnitMain]/metrix[unit.randomUnitSecond]);
+}
+else {
+  result.resultValue1 = randomNumber * (metrix[unit.randomUnitMain]*metrix[unit.randomUnitFirst]);
+  result.resultValue2 = randomNumber * (metrix[unit.randomUnitMain]*metrix[unit.randomUnitSecond]);
+}
 
   return (
     <div className='level-box'>
@@ -35,7 +57,7 @@ console.log(randomUnitSecond)
             </div>
           </div>
         </div>
-        <Button  type="primary" onClick={()=>console.log(+user.userValue1, +user.userValue2)} className='btn-check' >Проверить</Button>
+        <Button  type="primary" onClick={()=>console.log(result)} className='btn-check' >Проверить</Button>
     </div>
   )
 }
