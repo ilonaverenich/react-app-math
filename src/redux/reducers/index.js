@@ -4,6 +4,7 @@ import getValueUser from './getUserValueReducer';
 import arrowBackState from './stateReducer';
 import setRandom from './setRandomValue';
 import setRandomUnit from './setRandomDataReducer';
+import resultReducer from './getResultValueReducer';
 
 
 
@@ -12,5 +13,6 @@ export default combineReducers ({
    userValue : getValueUser,
    arrowState : arrowBackState,
    randomNumber: setRandom,
-   unit: setRandomUnit
+   unit: setRandomUnit,
+   result: resultReducer
 } )
