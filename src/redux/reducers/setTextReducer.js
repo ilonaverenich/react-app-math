@@ -2,7 +2,7 @@
    const initialValue = {
       value: 'dlina',
       level: 'light',
-      count: 1
+      count: ''
    };
 
 export default function textReducer(state=initialValue, action) {
@@ -19,7 +19,6 @@ export default function textReducer(state=initialValue, action) {
          return  {
             ...state,
             level: action.payload,
-          
          }
       }
       case SET_COUNT_NUM:{

@@ -1,17 +1,21 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, message, Space } from 'antd';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
 
 function ResultButton({ randomNumber, val1, val2, units }) {
 
 
-   const res = useSelector((store) => store.valueUser);
+  /*  const res = useSelector((store) => store.valueUser); */
    let resulVaue;
-   const text = useSelector((store) => store.text);
+   const data = useSelector((store) => store.data);
+   const value = useSelector((store) => store.value);
+   const userValue = useSelector((store) => store.userValue);
    const navigate = useNavigate();
-
-   console.log(res)
+   const dispatch = useDispatch();
+/* 
+   console.log(res) */
 
 
 
@@ -48,8 +52,10 @@ function ResultButton({ randomNumber, val1, val2, units }) {
 
    function result() {
 
-      console.log(res, resulVaue)
-      res == resulVaue ? message.success('Правильно!') : message.error('Неправильно!');
+     
+
+   /*    console.log(res, resulVaue) */
+  /*     res == resulVaue ? message.success('Правильно!') : message.error('Неправильно!'); */
    }
 
 

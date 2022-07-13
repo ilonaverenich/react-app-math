@@ -1,6 +1,5 @@
-import { SET_VALUE } from "./actionTypes";
-import { SET_LEVEL } from "./actionTypes";
-import { SET_COUNT_NUM} from "./actionTypes";
+import { SET_VALUE, SET_LEVEL, SET_COUNT_NUM } from "./actionTypes";
+
 
 export const setValue = data =>{
    return {

@@ -13,10 +13,8 @@ body{
 .container {
   background: white;
   width: 40%;
-  position: absolute;
-  top: 30%;
-  left: 35%;
-  max-height: 400px;
+margin: 0 auto;
+  height: auto;
   border-top-right-radius: 7px ;
   border-top-left-radius: 7px ;
   height: 500px;
@@ -62,7 +60,8 @@ body{
 }
 
 .inputValue {
-  width: 15%;
+  width: 50px;
+  margin: 5px 0px;
 }
 
 .center {
@@ -70,7 +69,27 @@ body{
   margin-top: 20px;
   margin-left: 20px;
 }
-.green {
-  background: rgb(139, 251, 141);
-  margin-right: 20px;
+.content_box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.column_number {
+  display: flex;
+  margin: 10px;
+}
+
+.arrow-back {
+  cursor: pointer;
+ padding-right: 20px;
+}
+.btn-check {
+  margin: 20px auto;
+}
+
+.level-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

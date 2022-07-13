@@ -9,20 +9,23 @@ import store from './redux/store';
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
 
+
 function App() {
 
   return (
     <div className="App">
       <div className='container'>
       <Provider store={store}>
-      <Header/>
+      
         <BrowserRouter>
+        <Header/>
         <Routes>
           <Route path='*' element={<Main/>}></Route>
           <Route path='/' element={<Main/>}></Route>
           <Route path='/massa' element={<Massa/>}></Route>
           <Route path='/dlina' element={<Dlina/>}></Route>
           <Route path='/square' element={<Square/>}></Route>
+
         </Routes>
         </BrowserRouter>
       </Provider>

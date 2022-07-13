@@ -1,47 +1,52 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import Imput from './Imput';
-import { Button, message, Space } from 'antd';
-import { useEffect } from 'react'
+
+import Easy from './Level/Easy';
+import Average from './Level/Average';
+import Hard from './Level/Hard';
+
 import ResultButton from './ResultButton';
+/* import {getUserValue1,getUserValue2,getUserValue3} from '../redux/actions/getUserValueAction' */
+
 
 
 
 function Dlina() {
+
    let input;
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const text = useSelector((store) => store.text);
+   const data = useSelector((store) => store.data);
+   const user = useSelector((store)=> store.userValue)
 
-
-   switch (text.level) {
-      case 'light': input = <><Imput></Imput></>; break;
-      case 'average': input = <><Imput ></Imput ><Imput ></Imput ></>; break;
-      case 'hard': input = <><Imput ></Imput ><Imput ></Imput ><Imput ></Imput ></>; break;
-   }
-
-   function getRandomNumber(min, max) {
-      let rand = min - 0.5 + Math.random() * (max - min + 1);
-      return Math.round(rand);
-   }
-
+/*    console.log(user)
    let units = ['мм', 'см', 'дм', 'м', 'км'];
+   showRandomValue1 = ()=>  arr[Math.floor(Math.random() * arr.length)]
+   
+   let randomUnitMain = showRandomValue1(units)
+   let randomUnitFirst = showRandomValue1(units.filter((item)=>item!==randomUnitMain))
+   let randomUnitSecond = showRandomValue1(units.filter((item)=>item!==randomUnitMain && item!=randomUnitFirst))
+   let randomUnitThird = showRandomValue1(units.filter((item)=>item!==varandomUnitMainl1 && item!=randomUnitFirst && item!=randomUnitSecond)) */
 
-   function showRandomValue1(arr) {
-      return arr[Math.floor(Math.random() * arr.length)]
+/*    switch (data.level) {
+      case 'light': <Easy/>; break;
+     case 'average': input = <div><Input onChange={(e)=>dispatch(getUserValue1(e.target.value))}/><Input onChange={(e)=>dispatch(getUserValue2(e.target.value))}/></div>; break;
+      case 'hard': input = <div><Input onChange={(e)=>dispatch(getUserValue1(e.target.value))}/><Input onChange={(e)=>dispatch(getUserValue2(e.target.value))}/><Input onChange={(e)=>dispatch(getUserValue3(e.target.value))}/></div>; break;  
    }
-   let val1 = showRandomValue1(units)
-   let val2 = showRandomValue1(units)
+ */
+ /*   function getRandomNumber(min, max) {
+      let rand = ;
+      return ;
+   } */
 
-   const randomNumber = getRandomNumber(1, text.count);
-
-
-   return (
+return (
       <div>
          <p>ВНИМАНИЕ! Десятичные дроби вводятся через точку. Например: 0.003</p>
-         <div className='center'>   {randomNumber}{val1} {input} {val2} </div>
-         <ResultButton randomNumber={randomNumber} val1={val1} val2={val2} units={units} />
+    
+
+         {data.level =='light'? <Easy/>:data.level =='average'? <Average/>: <Hard/> }
+         {/* <ResultButton randomNumber={randomNumber} val1={val1} val2={val2} units={units} /> */}
+      
       </div>
    )
 }

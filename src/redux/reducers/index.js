@@ -1,8 +1,16 @@
 import {combineReducers} from 'redux';
 import textReducer from './setTextReducer';
-import getValue from './getValueReducer';
+import getValueUser from './getUserValueReducer';
+import arrowBackState from './stateReducer';
+import setRandom from './setRandomValue';
+import setRandomUnit from './setRandomDataReducer';
+
+
 
 export default combineReducers ({
-   text:textReducer,
-   valueUser: getValue
+   data : textReducer,
+   userValue : getValueUser,
+   arrowState : arrowBackState,
+   randomNumber: setRandom,
+   unit: setRandomUnit
 } )
