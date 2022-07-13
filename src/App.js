@@ -18,6 +18,7 @@ function App() {
       <Header/>
         <BrowserRouter>
         <Routes>
+          <Route path='*' element={<Main/>}></Route>
           <Route path='/' element={<Main/>}></Route>
           <Route path='/massa' element={<Massa/>}></Route>
           <Route path='/dlina' element={<Dlina/>}></Route>

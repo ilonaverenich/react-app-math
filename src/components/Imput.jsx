@@ -6,17 +6,14 @@ import { useState, useEffect } from 'react';
 
 const Imput = () => {
    const dispatch = useDispatch();
-
-
    const [userValue, setUserValue] = useState('');
-   /* console.log(userValue) */
 
    dispatch(getValue(userValue))
 
 
 
 
-   return < Input onChange={(e) => setUserValue(e.target.value)} className='inputValue' />
+   return <Input value={userValue} onChange={(e) => setUserValue(e.target.value)} className='inputValue' />
 }
 
 
