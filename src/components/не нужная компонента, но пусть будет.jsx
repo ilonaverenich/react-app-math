@@ -17,12 +17,7 @@ function ResultButton({ randomNumber, val1, val2, units }) {
 /* 
    console.log(res) */
 
-
-
-
-
-
-   switch (val1 !== val2) {
+  switch (val1 !== val2) {
       case val1 == units[0] && val2 === units[1]: resulVaue = 0.1 * randomNumber; break;
       case val1 == units[0] && val2 === units[2]: resulVaue = 0.01 * randomNumber; break;
       case val1 == units[0] && val2 === units[3]: resulVaue = 0.001 * randomNumber; break;

@@ -1,20 +1,10 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { Input, Button, message} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
-import {getUserValue2, getUserValue1} from '../../redux/actions/getUserValueAction';
-/* import {randomUnitMain, randomUnitFirst,randomUnitSecond} from '../handleRandomData' */
-
+import {getUserValue2, getUserValue1} from '../../../../redux/actions/getUserValueAction';
 
 
 function Average() {
-/* 
-  let result ={
-    resultValue1 :'',
-    resultValue2: '',
-    resultValue3: ''
-  }; */
-/*   const [stateSucces, setStateSucces] = useState(false);
-  const [stateError, setStateError] = useState(false); */
 
   const dispatch = useDispatch();
   const user = useSelector((store)=> store.userValue)

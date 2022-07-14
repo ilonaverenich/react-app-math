@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import { Input, Button, message} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
-import { getUserValue1} from '../../redux/actions/getUserValueAction';
-import {getRandomCount} from '../../redux/actions/setRandomValue';
-import {getRandomUnitMain,getRandomUnitValue1} from '../../redux/actions/setRandomDataAction';
-import {exampleOne, exampleTwo} from '../handleRandomData';
-import {getStatusFirstInput} from '../../redux/actions/stateAction'
+import { getUserValue1} from '../../../../redux/actions/getUserValueAction';
+import {getRandomCount} from '../../../../redux/actions/setRandomValue';
+import {getRandomUnitMain,getRandomUnitValue1} from '../../../../redux/actions/setRandomDataAction';
+import {exampleOne, exampleTwo} from '../../handleRandomData';
+import {getStatusFirstInput} from '../../../../redux/actions/stateAction'
 
 
 
@@ -78,18 +78,28 @@ function toSummarize(){
   message.info({
     className:'cusstom-class',
     content: `Всего попыток: ${allRes}. Из них правильных -  ${success} - ${(success/allRes*100).toFixed(1)}%, неправильных -  ${error} - ${(error/allRes*100).toFixed(1)}%`,
-    duration:8
+    duration:4
   })
 
 }
     
     return (
-    <div className='level-box'>
+    <div className='content__block_easy'>
        
-        <div>
-        {randomNumber} {unit.randomUnitMain} = 
-        <Input className='inputValue' status={state.getStatus1?'error':''} value={valueInput} onChange={(e)=>getInputValue(e)}/> {unit.randomUnitFirst}
-            </div>
+        <div className='content__block_easy_value'>
+          
+              <div className='randomUnit'>{randomNumber} {unit.randomUnitMain}
+              </div> 
+              = 
+              <Input 
+              className='inputValue' 
+              status={state.getStatus1?'error':''} 
+              value={valueInput} 
+              onChange={(e)=>getInputValue(e)}/> 
+              {unit.randomUnitFirst}
+            
+            
+        </div>
             <div>
   
             </div>

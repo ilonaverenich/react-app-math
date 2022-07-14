@@ -1,10 +1,10 @@
 import './App.less';
 import { Provider } from 'react-redux';
-import Main from './components/Main/Main.jsx';
-import Dlina from './components/Dlina';
-import Header from './components/Header';
-import Massa from './components/Massa';
-import Square from './components/Square';
+import Main from './components/Main/Main'
+import Dlina from './components/Units/Dlina/Dlina';
+import Header from './components/Header/Header';
+import Massa from './components/Units/Massa/Massa';
+import Square from './components/Units/Square/Square'
 import store from './redux/store';
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
@@ -18,7 +18,6 @@ function App() {
       <Provider store={store}>
       
         <BrowserRouter>
-        <Header/>
         <Routes>
           <Route path='*' element={<Main/>}></Route>
           <Route path='/' element={<Main/>}></Route>
