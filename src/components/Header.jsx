@@ -1,5 +1,4 @@
 
-import {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
 import {setArrowBack} from '../redux/actions/stateAction'
 import { useNavigate } from "react-router-dom";
@@ -8,9 +7,7 @@ function Header() {
 const dispatch = useDispatch();
 const navigate = useNavigate();
 
-const arrowBack = useSelector((store)=>store.arrowState)
-console.log(arrowBack)
-
+const state = useSelector((store)=>store.state)
 function handleBack(){
    dispatch (setArrowBack(false))
    navigate('/') 
@@ -18,7 +15,8 @@ function handleBack(){
 
 
    return (
-      <div className='header'>{!arrowBack? '' :<img onClick={()=> handleBack()} className='arrow-back' src='https://i.postimg.cc/2StmCpGP/icons8-24.png'></img>}Математический тренажер</div>
+    <div className='header'>{!state.arrowBack? '' :<img onClick={()=> handleBack()} className='arrow-back' src='https://i.postimg.cc/2StmCpGP/icons8-24.png'></img>}
+    Математический тренажер</div> 
    )
 }
 

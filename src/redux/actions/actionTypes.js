@@ -27,3 +27,10 @@ export const SET_RANDOM_DATA4 = 'SET_RANDOM_DATA4';
 export const GET_RESULT_VALUE1 ='GET_RESULT_VALUE1';
 export const GET_RESULT_VALUE2 ='GET_RESULT_VALUE2';
 export const GET_RESULT_VALUE3 ='GET_RESULT_VALUE3';
+
+
+//хранение статуса, правильно ли ответил пользователь, или нет
+
+export const GET_STATUS_INPUT1 ='GET_STATUS_INPUT1';
+export const GET_STATUS_INPUT2 ='GET_STATUS_INPUT2';
+export const GET_STATUS_INPUT3 ='GET_STATUS_INPUT3';

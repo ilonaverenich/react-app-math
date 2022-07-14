@@ -6,24 +6,26 @@ import { Col, Divider, Row } from 'antd';
 import {setArrowBack} from '../../redux/actions/stateAction';
 import {getRandomCount} from '../../redux/actions/setRandomValue';
 import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../redux/actions/setRandomDataAction'
-import {randomUnitMain,randomUnitFirst,randomUnitSecond,randomUnitThird} from '../handleRandomData'
+import {randomUnitMain,randomUnitFirst,randomUnitSecond,randomUnitThird} from '../handleRandomData';
+import {useState} from 'react'
 
 function Main() {
    const navigate = useNavigate();
    const { Option } = Select;
    const dispatch = useDispatch();
    const data = useSelector((store) => store.data);
-   const user = useSelector((store)=> store.userValue)
+   const user = useSelector((store)=> store.userValue);
 
-   console.log(user)
 
    function handleFunc() {
+
       dispatch (setArrowBack(true))
       dispatch(getRandomCount(data.count)) 
       dispatch(getRandomUnitMain(randomUnitMain))
       dispatch(getRandomUnitValue1(randomUnitFirst)) 
       dispatch(getRandomUnitValue2(randomUnitSecond))
       dispatch(getRandomUnitValue3(randomUnitThird))
+      
       switch (data.value) {
          case 'massa': {
             navigate('/massa'); break;
@@ -60,8 +62,8 @@ function Main() {
                            <Radio.Button value="hard">Тяжёлый</Radio.Button>
                         </Radio.Group></div>
                      <div>
-                        <span className='subtitle'>Выберите промежуток: [1,{data.count}]</span>
-                        <Slider className='slider' value={data.count} onChange={(e) => dispatch(setCountNum(e))} min={1} /></div>
+                        <span className='subtitle'>Выберите промежуток: [1, {data.count}]</span>
+                        <Slider className='slider' defaultValue={10} value={data.count} onChange={(e) => dispatch(setCountNum(e))} min={1} /></div>
                      <Button className='btn-submit' type="submit" onClick={() => handleFunc()}>Начать</Button >
                   </Form>
                </Col>

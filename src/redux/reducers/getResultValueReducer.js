@@ -11,20 +11,20 @@ export default function resultReducer(state=initialValue, action) {
       case GET_RESULT_VALUE1:{
          return  {
             ...state,
-            resultValue1 : action.payload,
+            resultValue1 : Math.floor(action.payload),
         
          }
       }
       case GET_RESULT_VALUE2:{
          return  {
             ...state,
-            resultValue2 : action.payload,
+            resultValue2 : Math.floor(action.payload),
          }
       }
       case GET_RESULT_VALUE3:{
          return  {
             ...state,
-            resultValue3 : action.payload
+            resultValue3 : Math.floor(action.payload)
          }
       } 
    
