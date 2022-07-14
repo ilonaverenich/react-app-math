@@ -6,6 +6,7 @@ import {setArrowBack,getStatusFirstInput} from '../../redux/actions/stateAction'
 import {getRandomCount} from '../../redux/actions/setRandomValue';
 import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../redux/actions/setRandomDataAction'
 import {randomUnitMain,randomUnitFirst,randomUnitSecond,randomUnitThird} from '../Units/handleRandomData';
+import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import style from './Main.module.less'
 
@@ -93,9 +94,10 @@ function Main() {
                      </div>
 
                      <div className={style.content__block__btn}>
-                     <Button className='btn-submit' type="primary" onClick={() => handleFunc()}> Начать </Button >
-                     </div>
+                     <Button className='btn-submit' type="primary" onClick={() => handleFunc()}> Старт </Button >
+                     </div> 
                </div>
+             <Footer/>
          </div>
 
 

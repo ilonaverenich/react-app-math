@@ -84,11 +84,11 @@ function toSummarize(){
 }
     
     return (
-    <div className='content__block_easy'>
+    <div className='content__block'>
        
         <div className='content__block_easy_value'>
           
-              <div className='randomUnit'>{randomNumber} {unit.randomUnitMain}
+              <div className='randomUnit'>{randomNumber} <span className='unit'>{unit.randomUnitMain}</span>
               </div> 
               = 
               <Input 
@@ -100,15 +100,20 @@ function toSummarize(){
             
             
         </div>
-            <div>
-  
+            <div className='content__block_easy_btn'>
+             <Button  type="primary" onClick={()=>handleCalc()} className='btn-check' >Проверить</Button>
+            <div className='box_btn'>
+            {(success>=1 || error>=1)?<Button type='primary' className='btn-check res-btn'  onClick={()=>toSummarize()}>Подвести итог</Button>:""}
             </div>
-            <Button  type="primary" onClick={()=>handleCalc()} className='btn-check' >Проверить</Button>
+            </div>
+           
 
-            {(success>=1 || error>=1)?<Button type='primary' onClick={()=>toSummarize()}>Подвести итог</Button>:""}
+           
 
-            <p>Количество правильных ответов: {success}</p>
-            <p>Количество неправильных ответов: {error}</p>
+           <div className='content__block_easy_info'>
+                <p>Количество правильных ответов: <span className='count'>{success}</span> </p>
+                <p>Количество неправильных ответов:<span className='count'> {error}</span></p>
+           </div>
     </div>
   )
 }
