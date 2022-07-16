@@ -2,7 +2,7 @@ import { setValue, setCountNum, setLevel } from '../../redux/actions/setTextActi
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Radio, Select, Slider} from 'antd';
 import { useNavigate } from 'react-router-dom';
-import {setArrowBack,getStatusFirstInput} from '../../redux/actions/stateAction';
+import {setArrowBack,getStatusFirstInput,getStatusSecondInput,getStatusThirdInput} from '../../redux/actions/stateAction';
 import {getRandomCount} from '../../redux/actions/setRandomValue';
 import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../redux/actions/setRandomDataAction'
 import {randomUnitMain,randomUnitFirst,randomUnitSecond,randomUnitThird} from '../Units/handleRandomData';
@@ -26,7 +26,10 @@ function Main() {
       dispatch(getRandomUnitValue1(randomUnitFirst)) 
       dispatch(getRandomUnitValue2(randomUnitSecond))
       dispatch(getRandomUnitValue3(randomUnitThird))
+    
       dispatch(getStatusFirstInput(false))
+      dispatch(getStatusSecondInput(false))
+      dispatch(getStatusThirdInput(false))
       
       switch (data.value) {
          case 'massa': {

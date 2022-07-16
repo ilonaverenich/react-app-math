@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { Input, Button, message} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 import { getUserValue1} from '../../../../redux/actions/getUserValueAction';
@@ -100,17 +100,23 @@ function toSummarize(){
             
             
         </div>
-            <div className='content__block_easy_btn'>
-             <Button  type="primary" onClick={()=>handleCalc()} className='btn-check' >Проверить</Button>
-            <div className='box_btn'>
-            {(success>=1 || error>=1)?<Button type='primary' className='btn-check res-btn'  onClick={()=>toSummarize()}>Подвести итог</Button>:""}
-            </div>
+            <div className='content__block_btn'>
+              <Button  
+              type="primary" 
+              onClick={()=>handleCalc()} 
+              className='btn-check' >
+                Проверить
+              </Button>
+
+              <div className='box_btn'>
+              {(success>=1 || error>=1)?<Button type='primary' className='btn-check res-btn'  onClick={()=>toSummarize()}>Подвести итог</Button>:""}
+              </div>
             </div>
            
 
            
 
-           <div className='content__block_easy_info'>
+           <div className='content__block_info'>
                 <p>Количество правильных ответов: <span className='count'>{success}</span> </p>
                 <p>Количество неправильных ответов:<span className='count'> {error}</span></p>
            </div>
