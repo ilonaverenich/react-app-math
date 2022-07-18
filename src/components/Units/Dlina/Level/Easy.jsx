@@ -5,7 +5,9 @@ import { getUserValue1} from '../../../../redux/actions/getUserValueAction';
 import {getRandomCount} from '../../../../redux/actions/setRandomValue';
 import {getRandomUnitMain,getRandomUnitValue1} from '../../../../redux/actions/setRandomDataAction';
 import {exampleOne, exampleTwo} from '../../handleRandomData';
-import {getStatusFirstInput} from '../../../../redux/actions/stateAction'
+import {getStatusFirstInput} from '../../../../redux/actions/stateAction';
+import {checkResultDlina} from '../../handleResultValue'
+
 
 
 
@@ -33,7 +35,7 @@ function Easy() {
     console.log('user',user)
     console.log('state',state)
     
-    let metrix ={
+    /* let metrix ={
       мм: 1,
       см:10,
       дм:100,
@@ -48,14 +50,15 @@ function Easy() {
       else {
            result.resultValue1 = randomNumber * metrix[unit.randomUnitMain]*metrix[unit.randomUnitFirst]
       } 
-
+ */
   function getInputValue (e){
     dispatch(getUserValue1(e.target.value))
     setValueInput(e.target.value)
   }
 
 
-function handleCalc(){
+function handleCalc(rMain, rFirst, rSecond, rThird, resVal1,resVal2,resval3, randomNumber){
+  checkResultDlina(rMain, rFirst, rSecond, rThird, resVal1,resVal2,resval3, randomNumber)
   if (result.resultValue1 == user.userValue1){
     message.success('Верно')
     setValueInput('')
@@ -103,7 +106,7 @@ function toSummarize(){
             <div className='content__block_btn'>
               <Button  
               type="primary" 
-              onClick={()=>handleCalc()} 
+              onClick={()=>handleCalc(unit.randomUnitMain,unit.randomUnitFirst,undefined,undefined,result.resultValue1,undefined,undefined,randomNumber)} 
               className='btn-check' >
                 Проверить
               </Button>

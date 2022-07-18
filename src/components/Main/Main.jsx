@@ -6,6 +6,7 @@ import {setArrowBack,getStatusFirstInput,getStatusSecondInput,getStatusThirdInpu
 import {getRandomCount} from '../../redux/actions/setRandomValue';
 import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../redux/actions/setRandomDataAction'
 import {randomUnitMain,randomUnitFirst,randomUnitSecond,randomUnitThird} from '../Units/handleRandomData';
+
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import style from './Main.module.less'
@@ -15,6 +16,8 @@ function Main() {
    const { Option } = Select;
    const dispatch = useDispatch();
    const data = useSelector((store) => store.data);
+   const unit = useSelector((store) => store.unit);
+   const result = useSelector((store)=> store.result);
 
 
 

@@ -23,7 +23,7 @@ function Average() {
   const [error,setError] = useState(0)
   let allRes = error+success;
 
-console.log(result)
+/* console.log(result)
   let metrix ={
     мм: 1,
     см:10,
@@ -39,21 +39,9 @@ if ((metrix[unit.randomUnitMain]> metrix[unit.randomUnitFirst])||(metrix[unit.ra
 
 if ((metrix[unit.randomUnitMain] > metrix[unit.randomUnitSecond])||(metrix[unit.randomUnitMain]< metrix[unit.randomUnitSecond]))
 {
-  result.resultValue2  =  randomNumber* (metrix[unit.randomUnitMain] /metrix[unit.randomUnitSecond]);
-}
-
-
-/*  if (metrix[unit.randomUnitMain] < metrix[unit.randomUnitFirst] && metrix[unit.randomUnitMain] < metrix[unit.randomUnitSecond]){
-  result.resultValue1 = (randomNumber * (metrix[unit.randomUnitMain]/metrix[unit.randomUnitFirst]));
-  result.resultValue2 = (randomNumber * (metrix[unit.randomUnitMain]/metrix[unit.randomUnitSecond]));
-}
-
-if (metrix[unit.randomUnitMain] > metrix[unit.randomUnitFirst] && metrix[unit.randomUnitMain] > metrix[unit.randomUnitSecond]){
-  result.resultValue1 = (randomNumber * (metrix[unit.randomUnitMain]*metrix[unit.randomUnitFirst]));
-  result.resultValue2 = (randomNumber * (metrix[unit.randomUnitMain]*metrix[unit.randomUnitSecond]));
+  result.resultValue2  =  randomNumber* metrix[unit.randomUnitMain] /metrix[unit.randomUnitSecond];
 }
  */
-
 
 function getInputValue1 (e){
   dispatch(getUserValue1(e.target.value))
@@ -143,7 +131,7 @@ function toSummarize(){
 
 
         <div className='content__block_btn'>
-             <Button  type="primary" onClick={()=>handleCalc()} className='btn-check' >Проверить</Button>
+             <Button  type="primary" onClick={()=>handleCalc(unit.getRandomUnitMain, unit.randomUnitFirst, undefined,undefined,result.resultValue1,undefined,undefined,randomNumber)} className='btn-check' >Проверить</Button>
               <div className='box_btn'>
               {(success>=1 || error>=1)?<Button type='primary' className='btn-check res-btn'  onClick={()=>toSummarize()}>Подвести итог</Button>:""}
               </div>

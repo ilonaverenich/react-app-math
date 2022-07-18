@@ -92,7 +92,7 @@ function Hard() {
     
     }
   
-    console.log(result)
+/*     console.log(result)
     let metrix ={
       мм: 1,
       см:10,
@@ -108,14 +108,14 @@ function Hard() {
     
     if ((metrix[unit.randomUnitMain]> metrix[unit.randomUnitSecond])||(metrix[unit.randomUnitMain]< metrix[unit.randomUnitSecond]))
     {
-     result.resultValue2  =  (randomNumber* (metrix[unit.randomUnitMain] /metrix[unit.randomUnitSecond]));
+     result.resultValue2  =  randomNumber* metrix[unit.randomUnitMain] /metrix[unit.randomUnitSecond];
     }
     
     if ((metrix[unit.randomUnitMain]> metrix[unit.randomUnitThird])||(metrix[unit.randomUnitMain]< metrix[unit.randomUnitThird]))
     {
-     result.resultValue3 =  (randomNumber* (metrix[unit.randomUnitMain]/metrix[unit.randomUnitThird]));
+     result.resultValue3 =  randomNumber* metrix[unit.randomUnitMain]/metrix[unit.randomUnitThird];
     }
-    
+     */
 
 
   return (
