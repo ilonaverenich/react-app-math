@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/react-app-math/static/css/main.e4f38dee.css",
-    "main.js": "/react-app-math/static/js/main.07ff4556.js",
+    "main.css": "/react-app-math/static/css/main.f2a2ce15.css",
+    "main.js": "/react-app-math/static/js/main.b5197640.js",
     "index.html": "/react-app-math/index.html",
-    "main.e4f38dee.css.map": "/react-app-math/static/css/main.e4f38dee.css.map",
-    "main.07ff4556.js.map": "/react-app-math/static/js/main.07ff4556.js.map"
+    "main.f2a2ce15.css.map": "/react-app-math/static/css/main.f2a2ce15.css.map",
+    "main.b5197640.js.map": "/react-app-math/static/js/main.b5197640.js.map"
   },
   "entrypoints": [
-    "static/css/main.e4f38dee.css",
-    "static/js/main.07ff4556.js"
+    "static/css/main.f2a2ce15.css",
+    "static/js/main.b5197640.js"
   ]
 }
