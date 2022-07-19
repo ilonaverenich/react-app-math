@@ -6,7 +6,9 @@ import {getRandomCount} from '../../../../redux/actions/setRandomValue';
 import {getRandomUnitMain,getRandomUnitValue1} from '../../../../redux/actions/setRandomDataAction';
 import {exampleOne, exampleTwo} from '../../handleRandomData';
 import {getStatusFirstInput} from '../../../../redux/actions/stateAction';
-import {checkResultDlina} from '../../handleResultValue'
+import {checkResultDlina} from '../../handleResultValue';
+import {getResultValue1} from './../../../../redux/actions/getResultValueAction'
+
 
 
 
@@ -29,36 +31,21 @@ function Easy() {
 
     let allRes = error+success;
 
-    console.log('data',data)
-    console.log('unit',unit)
+
     console.log('result',result)
-    console.log('user',user)
-    console.log('state',state)
+  
     
-    /* let metrix ={
-      мм: 1,
-      см:10,
-      дм:100,
-      м: 1000,
-      км:1000000
-  }
-
-      if (metrix[unit.randomUnitMain]<metrix[unit.randomUnitFirst])
-      {
-          result.resultValue1 = randomNumber * (metrix[unit.randomUnitMain]/metrix[unit.randomUnitFirst]);
-      }
-      else {
-           result.resultValue1 = randomNumber * metrix[unit.randomUnitMain]*metrix[unit.randomUnitFirst]
-      } 
- */
-  function getInputValue (e){
+   function getInputValue (e){
     dispatch(getUserValue1(e.target.value))
-    setValueInput(e.target.value)
-  }
+    setValueInput(e.target.value) }
 
 
-function handleCalc(rMain, rFirst, rSecond, rThird, resVal1,resVal2,resval3, randomNumber){
-  checkResultDlina(rMain, rFirst, rSecond, rThird, resVal1,resVal2,resval3, randomNumber)
+    function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber) {
+
+   
+    const obj = checkResultDlina(rMain, rFirst, rSecond, rThird,randomNumber);
+    dispatch(getResultValue1(obj.resVal1))
+ 
   if (result.resultValue1 == user.userValue1){
     message.success('Верно')
     setValueInput('')
@@ -106,7 +93,7 @@ function toSummarize(){
             <div className='content__block_btn'>
               <Button  
               type="primary" 
-              onClick={()=>handleCalc(unit.randomUnitMain,unit.randomUnitFirst,undefined,undefined,result.resultValue1,undefined,undefined,randomNumber)} 
+              onClick={()=>handleCalc(unit.randomUnitMain,unit.randomUnitFirst,undefined,undefined,randomNumber)} 
               className='btn-check' >
                 Проверить
               </Button>

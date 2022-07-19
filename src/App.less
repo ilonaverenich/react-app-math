@@ -7,7 +7,7 @@
 @blue-color :rgb(33, 116, 194);
 @size130px : 130px;
 html{
-  overflow: hidden;
+ /*  overflow: hidden; */
 }
 .wrapper {
   font-family: 'Roboto', sans-serif;
@@ -17,7 +17,7 @@ html{
   align-items: center;
   justify-content: center;
   background: rgb(143, 233, 254);
-  overflow: hidden;
+
 }
 
 .content{
@@ -206,16 +206,30 @@ html{
 
 @media screen and (max-width: 800px){
   .wrapper {
-    background: rgb(255, 255, 255);
+    background: rgb(221, 240, 255);
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+
   }
   .radio-group {
     display: flex;
     flex-direction: column;
   }
-.content {
-  height: 540px;
-}
+  .content {
+    width: 100vw;
+    height: auto;
+    
+    display: flex;
+    justify-content: start;
+
+
+  }
  .content__block_info {
   font-size: 14px;
  }
+ .content__info{
+  display: flex;
+  align-items: flex-start; }
 }
