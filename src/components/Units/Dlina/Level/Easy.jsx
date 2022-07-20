@@ -28,25 +28,22 @@ function Easy() {
     const result = useSelector((store)=> store.result);
     const data = useSelector((store)=>store.data)
     const state = useSelector((store)=>store.state)
-
+    console.log(result)
     let allRes = error+success;
-
-
-    console.log('result',result)
-  
     
+
    function getInputValue (e){
+    
     dispatch(getUserValue1(e.target.value))
     setValueInput(e.target.value) }
 
-
     function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber) {
 
-   
     const obj = checkResultDlina(rMain, rFirst, rSecond, rThird,randomNumber);
-    dispatch(getResultValue1(obj.resVal1))
- 
-  if (result.resultValue1 == user.userValue1){
+ /*    dispatch(getResultValue1())
+    console.log(obj)  */
+  
+  if (obj.resVal1 == user.userValue1){
     message.success('Верно')
     setValueInput('')
     setSuccess(success+1)
@@ -78,23 +75,32 @@ function toSummarize(){
        
         <div className='content__block_easy_value'>
           
-              <div className='randomUnit'>{randomNumber} <span className='unit'>{unit.randomUnitMain}</span>
+              <div className='randomUnit'>
+                {randomNumber} 
+              
+              <span className='unit'>
+                {unit.randomUnitMain}
+                </span>
+
               </div> 
               = 
               <Input 
-              className='inputValue' 
-              status={state.getStatus1?'error':''} 
-              value={valueInput} 
-              onChange={(e)=>getInputValue(e)}/> 
+                  className='inputValue' 
+                  status={state.getStatus1?'error':''} 
+                  value={valueInput} 
+                  onKeyDown={(e)=>e.keyCode === 13?handleCalc(unit.randomUnitMain,unit.randomUnitFirst,undefined,undefined,randomNumber):''}
+                  onChange={(e)=>getInputValue(e)}/> 
               {unit.randomUnitFirst}
             
             
         </div>
             <div className='content__block_btn'>
               <Button  
-              type="primary" 
-              onClick={()=>handleCalc(unit.randomUnitMain,unit.randomUnitFirst,undefined,undefined,randomNumber)} 
-              className='btn-check' >
+                  type="primary" 
+                  onClick={()=>handleCalc(unit.randomUnitMain,unit.randomUnitFirst,undefined,undefined,randomNumber)} 
+                  className='btn-check'
+        
+                  >
                 Проверить
               </Button>
 
@@ -102,9 +108,6 @@ function toSummarize(){
               {(success>=1 || error>=1)?<Button type='primary' className='btn-check res-btn'  onClick={()=>toSummarize()}>Подвести итог</Button>:""}
               </div>
             </div>
-           
-
-           
 
            <div className='content__block_info'>
                 <p>Количество правильных ответов: <span className='count'>{success}</span> </p>

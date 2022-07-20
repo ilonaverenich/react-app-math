@@ -6,6 +6,7 @@ import {getStatusFirstInput,getStatusSecondInput, getStatusThirdInput} from '../
 import {getRandomCount} from '../../../../redux/actions/setRandomValue';
 import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../../../redux/actions/setRandomDataAction';
 import {exampleOne, exampleTwo,exampleTree, exampleFour} from '../../handleRandomData';
+import {checkResultDlina} from '../../handleResultValue';
 
 
 function Hard() {
@@ -42,10 +43,11 @@ function Hard() {
     dispatch(getUserValue3(e.target.value))
      setValueInput3(e.target.value)
     }
-    function handleCalc (){
+    function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber){
 
-
-      if (result.resultValue2 == user.userValue2 && result.resultValue1 == user.userValue1 && result.resultValue3 == user.userValue3){
+      const obj = checkResultDlina(rMain, rFirst, rSecond, rThird,randomNumber);
+      console.log('hard obj', obj)
+      if (obj.resVal2 == user.userValue2 && obj.resVal1 == user.userValue1 && obj.resVal3 == user.userValue3){
         message.success('Верно')
         setSuccess(success+1)
         setValueInput1('')
@@ -56,27 +58,11 @@ function Hard() {
         dispatch(getRandomUnitValue1(exampleTwo)) 
         dispatch(getRandomUnitValue2(exampleTree)) 
         dispatch(getRandomUnitValue3(exampleFour)) 
-        dispatch(getStatusFirstInput(false))
-        dispatch(getStatusSecondInput(false))
-        dispatch(getStatusThirdInput(false))
+     
       
       } 
       else {
-        setError(error+1)
-        if (result.resultValue1!==user.valueInput1){
-          message.error('Ошибка')
-          dispatch(getStatusSecondInput(true))
-          
-        }
-        else  if  (result.resultValue2!==user.valueInput2) {
-          message.error('Ошибка')
-          dispatch(getStatusFirstInput(true))
-        }
-        else  if  (result.resultValue3!==user.valueInput3) {
-          message.error('Ошибка')
-          dispatch(getStatusThirdInput(true))
-        }
-        
+        message.error('Ошибка! Проверьте введенные данные еще раз!')
       }
     }
     
@@ -91,32 +77,6 @@ function Hard() {
       })
     
     }
-  
-/*     console.log(result)
-    let metrix ={
-      мм: 1,
-      см:10,
-      дм:100,
-      м:1000,
-      км:1000000
-  }
-
-    if ((metrix[unit.randomUnitMain]> metrix[unit.randomUnitFirst])||(metrix[unit.randomUnitMain]< metrix[unit.randomUnitFirst]))
-    {
-      result.resultValue1 =  randomNumber  * metrix[unit.randomUnitMain] / metrix[unit.randomUnitFirst];
-    }
-    
-    if ((metrix[unit.randomUnitMain]> metrix[unit.randomUnitSecond])||(metrix[unit.randomUnitMain]< metrix[unit.randomUnitSecond]))
-    {
-     result.resultValue2  =  randomNumber* metrix[unit.randomUnitMain] /metrix[unit.randomUnitSecond];
-    }
-    
-    if ((metrix[unit.randomUnitMain]> metrix[unit.randomUnitThird])||(metrix[unit.randomUnitMain]< metrix[unit.randomUnitThird]))
-    {
-     result.resultValue3 =  randomNumber* metrix[unit.randomUnitMain]/metrix[unit.randomUnitThird];
-    }
-     */
-
 
   return (
     <div className='content__block'>
@@ -167,7 +127,7 @@ function Hard() {
 
 
 <div className='content__block_btn'>
-   <Button  type="primary" onClick={()=>handleCalc()}  className='btn-check' >Проверить</Button>
+   <Button  type="primary" onClick={()=>handleCalc(unit.randomUnitMain,unit.randomUnitFirst,unit.randomUnitSecond,unit.randomUnitThird,randomNumber)}  className='btn-check' >Проверить</Button>
     <div className='box_btn'>
     {(success>=1 || error>=1)?<Button type='primary' className='btn-check res-btn'  onClick={()=>toSummarize()} >Подвести итог</Button>:""}
     </div>

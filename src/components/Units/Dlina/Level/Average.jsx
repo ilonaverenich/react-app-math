@@ -2,10 +2,11 @@ import React, {useState} from 'react'
 import { Input, Button, message} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserValue2, getUserValue1} from '../../../../redux/actions/getUserValueAction';
-import {getStatusFirstInput,getStatusSecondInput} from '../../../../redux/actions/stateAction';
 import {getRandomCount} from '../../../../redux/actions/setRandomValue';
 import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2} from '../../../../redux/actions/setRandomDataAction';
 import {exampleOne, exampleTwo,exampleTree} from '../../handleRandomData';
+import {checkResultDlina} from '../../handleResultValue';
+
 
 function Average() {
 
@@ -21,27 +22,10 @@ function Average() {
   const [valueInput2,setValueInput2] = useState('')
   const [success,setSuccess] = useState(0)
   const [error,setError] = useState(0)
+  
   let allRes = error+success;
 
-/* console.log(result)
-  let metrix ={
-    мм: 1,
-    см:10,
-    дм:100,
-    м:1000,
-    км:1000000
-}
 
-if ((metrix[unit.randomUnitMain]> metrix[unit.randomUnitFirst])||(metrix[unit.randomUnitMain]< metrix[unit.randomUnitFirst]))
-{
-  result.resultValue1 =  randomNumber  * metrix[unit.randomUnitMain] / metrix[unit.randomUnitFirst];
-}
-
-if ((metrix[unit.randomUnitMain] > metrix[unit.randomUnitSecond])||(metrix[unit.randomUnitMain]< metrix[unit.randomUnitSecond]))
-{
-  result.resultValue2  =  randomNumber* metrix[unit.randomUnitMain] /metrix[unit.randomUnitSecond];
-}
- */
 
 function getInputValue1 (e){
   dispatch(getUserValue1(e.target.value))
@@ -52,10 +36,11 @@ function getInputValue2 (e){
   dispatch(getUserValue2(e.target.value))
   setValueInput2(e.target.value)
 }
-function handleCalc (){
+function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber) {
 
+  const obj = checkResultDlina(rMain, rFirst, rSecond, rThird,randomNumber);
 
-  if (result.resultValue2 == user.userValue2 && result.resultValue1 == user.userValue1){
+  if (obj.resVal1 == user.userValue1 && obj.resVal2 == user.userValue2){
     message.success('Верно')
     setSuccess(success+1)
     setValueInput1('')
@@ -64,28 +49,19 @@ function handleCalc (){
     dispatch(getRandomUnitMain(exampleOne))
     dispatch(getRandomUnitValue1(exampleTwo)) 
     dispatch(getRandomUnitValue2(exampleTree)) 
-    dispatch(getStatusFirstInput(false))
-    dispatch(getStatusSecondInput(false))
+
   
   } 
   else {
     setError(error+1)
     if (result.resultValue1!==user.valueInput1){
-      message.error('Ошибка')
-      dispatch(getStatusSecondInput(true))
-      
+      message.error('Ошибка! Проверьте введенные данные еще раз!')
+        }  
     }
-    else {
-      message.error('Ошибка')
-      dispatch(getStatusFirstInput(true))
-    }
-  }
 }
 
 function toSummarize(){
 
-  dispatch(getStatusFirstInput(false))
-  dispatch(getStatusSecondInput(false))
   message.info({
     className:'cusstom-class',
     content: `Всего попыток: ${allRes}. Из них правильных -  ${success} - ${(success/allRes*100).toFixed(1)}%, неправильных -  ${error} - ${(error/allRes*100).toFixed(1)}%`,
@@ -131,16 +107,26 @@ function toSummarize(){
 
 
         <div className='content__block_btn'>
-             <Button  type="primary" onClick={()=>handleCalc(unit.getRandomUnitMain, unit.randomUnitFirst, undefined,undefined,result.resultValue1,undefined,undefined,randomNumber)} className='btn-check' >Проверить</Button>
+
+             <Button 
+              type="primary" 
+              onClick={()=>handleCalc(unit.randomUnitMain,unit.randomUnitFirst,unit.randomUnitSecond,unit.randomUnitThird,randomNumber)} className='btn-check' >
+                Проверить
+                </Button>
+
               <div className='box_btn'>
-              {(success>=1 || error>=1)?<Button type='primary' className='btn-check res-btn'  onClick={()=>toSummarize()}>Подвести итог</Button>:""}
+              {(success>=1 || error>=1)?
+              <Button type='primary' 
+              className='btn-check res-btn' 
+               onClick={()=>toSummarize()}> Подвести итог </Button> : ""}
               </div>
             </div>
 
         <div className='content__block_info'>
                 <p>Количество правильных ответов: <span className='count'>{success}</span> </p>
                 <p>Количество неправильных ответов:<span className='count'> {error}</span></p>
-           </div>
+        </div>
+
     </div>
   )
 }

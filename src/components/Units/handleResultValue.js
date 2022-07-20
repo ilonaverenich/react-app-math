@@ -21,17 +21,16 @@ export function checkResultDlina (rMain, rFirst, rSecond, rThird,randomNumber){
       if ((metrix[rMain]> metrix[rFirst])||(metrix[rMain]< metrix[rFirst]))
       {
         obj.resVal1 =  +( randomNumber  * metrix[rMain] / metrix[rFirst]);
-        console.log(obj.resVal1)
       }
       
       if ((metrix[rMain]> metrix[rSecond])||(metrix[rMain]< metrix[rSecond]))
       {
-        obj.resVal2 =  randomNumber* metrix[rMain] / metrix[rSecond];
+        obj.resVal2 =  +(randomNumber* metrix[rMain] / metrix[rSecond]) ;
       }
       
       if ((metrix[rMain]> metrix[rThird])||(metrix[rMain]< metrix[rThird]))
       {
-        obj.resVal3 =  randomNumber* metrix[rMain] / metrix[rThird];
+        obj.resVal3 =  +(randomNumber* metrix[rMain] / metrix[rThird]);
       }
 
       return obj

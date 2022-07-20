@@ -1,6 +1,6 @@
 import { setValue, setCountNum, setLevel } from '../../redux/actions/setTextAction';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Button, Radio, Select, Slider} from 'antd';
+import { Button, Radio, Select, Slider} from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {setArrowBack,getStatusFirstInput,getStatusSecondInput,getStatusThirdInput} from '../../redux/actions/stateAction';
 import {getRandomCount} from '../../redux/actions/setRandomValue';
@@ -16,13 +16,10 @@ function Main() {
    const { Option } = Select;
    const dispatch = useDispatch();
    const data = useSelector((store) => store.data);
-   const unit = useSelector((store) => store.unit);
    const result = useSelector((store)=> store.result);
 
-
-
    function handleFunc() {
-
+      
       dispatch (setArrowBack(true))
       dispatch(getRandomCount(data.count)) 
       dispatch(getRandomUnitMain(randomUnitMain))
@@ -68,7 +65,6 @@ function Main() {
                         </Select>
                      </div>
 
-
                      <div className={style.content__block__level}>
                         <span 
                         className='content__block__subtitle'>
@@ -100,6 +96,7 @@ function Main() {
                      </div>
 
                      <div className={style.content__block__btn}>
+
                      <Button className='btn-submit' type="primary" onClick={() => handleFunc()}> Старт </Button >
                      </div> 
                </div>
