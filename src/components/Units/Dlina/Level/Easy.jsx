@@ -4,10 +4,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import { getUserValue1} from '../../../../redux/actions/getUserValueAction';
 import {getRandomCount} from '../../../../redux/actions/setRandomValue';
 import {getRandomUnitMain,getRandomUnitValue1} from '../../../../redux/actions/setRandomDataAction';
-import {exampleOne, exampleTwo} from '../../handleRandomData';
+import {exampleOne, exampleTwo,anotherExample,unitsArray} from '../../handleRandomData';
 import {getStatusFirstInput} from '../../../../redux/actions/stateAction';
 import {checkResultDlina} from '../../handleResultValue';
-import {getResultValue1} from './../../../../redux/actions/getResultValueAction'
+
 
 
 
@@ -25,10 +25,11 @@ function Easy() {
     const user = useSelector((store)=> store.userValue)
     const randomNumber = useSelector((store)=>store.randomNumber)
     const unit = useSelector((store)=>store.unit)
-    const result = useSelector((store)=> store.result);
     const data = useSelector((store)=>store.data)
     const state = useSelector((store)=>store.state)
-    console.log(result)
+
+    console.log(unit)
+
     let allRes = error+success;
     
 
@@ -40,28 +41,27 @@ function Easy() {
     function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber) {
 
     const obj = checkResultDlina(rMain, rFirst, rSecond, rThird,randomNumber);
- /*    dispatch(getResultValue1())
-    console.log(obj)  */
   
   if (obj.resVal1 == user.userValue1){
     message.success('Верно')
     setValueInput('')
     setSuccess(success+1)
     dispatch(getRandomCount(data.count))
-    dispatch(getRandomUnitMain(exampleOne))
+    anotherExample(unitsArray)
+    dispatch(getRandomUnitMain(exampleOne)) 
     dispatch(getRandomUnitValue1(exampleTwo)) 
-    dispatch(getStatusFirstInput(false))
+
 
   }
   else {
     message.error('Неверно')
     setError(error+1)
-    dispatch(getStatusFirstInput(true))
+ 
   }
 }
 
 function toSummarize(){
-  dispatch(getStatusFirstInput(false))
+
   message.info({
     className:'cusstom-class',
     content: `Всего попыток: ${allRes}. Из них правильных -  ${success} - ${(success/allRes*100).toFixed(1)}%, неправильных -  ${error} - ${(error/allRes*100).toFixed(1)}%`,

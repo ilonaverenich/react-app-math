@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getUserValue2, getUserValue1} from '../../../../redux/actions/getUserValueAction';
 import {getRandomCount} from '../../../../redux/actions/setRandomValue';
 import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2} from '../../../../redux/actions/setRandomDataAction';
-import {exampleOne, exampleTwo,exampleTree} from '../../handleRandomData';
+import {exampleOne, exampleTwo,anotherExample,unitsArray,exampleTree} from '../../handleRandomData';
 import {checkResultDlina} from '../../handleResultValue';
 
 
@@ -37,6 +37,7 @@ function getInputValue2 (e){
   setValueInput2(e.target.value)
 }
 function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber) {
+  console.log('unit',unit)
 
   const obj = checkResultDlina(rMain, rFirst, rSecond, rThird,randomNumber);
 
@@ -44,13 +45,12 @@ function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber) {
     message.success('Верно')
     setSuccess(success+1)
     setValueInput1('')
-    setValueInput2('')
+    setValueInput2('');
+    anotherExample(unitsArray)
     dispatch(getRandomCount(data.count))
     dispatch(getRandomUnitMain(exampleOne))
     dispatch(getRandomUnitValue1(exampleTwo)) 
     dispatch(getRandomUnitValue2(exampleTree)) 
-
-  
   } 
   else {
     setError(error+1)

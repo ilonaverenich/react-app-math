@@ -4,8 +4,9 @@ import { Button, Radio, Select, Slider} from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {setArrowBack,getStatusFirstInput,getStatusSecondInput,getStatusThirdInput} from '../../redux/actions/stateAction';
 import {getRandomCount} from '../../redux/actions/setRandomValue';
-import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../redux/actions/setRandomDataAction'
-import {randomUnitMain,randomUnitFirst,randomUnitSecond,randomUnitThird} from '../Units/handleRandomData';
+import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../redux/actions/setRandomDataAction';
+import {exampleOne, exampleTwo,exampleTree, exampleFour,anotherExample,unitsArray} from '../Units/handleRandomData';
+ import {randomUnitMain,randomUnitFirst,randomUnitSecond,randomUnitThird} from '../Units/handleRandomData';
 
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
@@ -16,21 +17,20 @@ function Main() {
    const { Option } = Select;
    const dispatch = useDispatch();
    const data = useSelector((store) => store.data);
-   const result = useSelector((store)=> store.result);
-
+ 
    function handleFunc() {
-      
+      anotherExample(unitsArray)
       dispatch (setArrowBack(true))
       dispatch(getRandomCount(data.count)) 
-      dispatch(getRandomUnitMain(randomUnitMain))
-      dispatch(getRandomUnitValue1(randomUnitFirst)) 
-      dispatch(getRandomUnitValue2(randomUnitSecond))
-      dispatch(getRandomUnitValue3(randomUnitThird))
+      dispatch(getRandomUnitMain(exampleOne)) 
+      dispatch(getRandomUnitValue1(exampleTwo)) 
+      dispatch(getRandomUnitValue2(exampleTree)) 
+      dispatch(getRandomUnitValue3(exampleFour))  
     
-      dispatch(getStatusFirstInput(false))
+  /*     dispatch(getStatusFirstInput(false))
       dispatch(getStatusSecondInput(false))
       dispatch(getStatusThirdInput(false))
-      
+       */
       switch (data.value) {
          case 'massa': {
             navigate('/massa'); break;

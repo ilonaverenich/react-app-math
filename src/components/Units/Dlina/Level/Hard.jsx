@@ -5,7 +5,7 @@ import {getUserValue2, getUserValue1, getUserValue3} from '../../../../redux/act
 import {getStatusFirstInput,getStatusSecondInput, getStatusThirdInput} from '../../../../redux/actions/stateAction';
 import {getRandomCount} from '../../../../redux/actions/setRandomValue';
 import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../../../redux/actions/setRandomDataAction';
-import {exampleOne, exampleTwo,exampleTree, exampleFour} from '../../handleRandomData';
+import {exampleOne, exampleTwo,exampleTree, exampleFour,anotherExample,unitsArray} from '../../handleRandomData';
 import {checkResultDlina} from '../../handleResultValue';
 
 
@@ -46,8 +46,9 @@ function Hard() {
     function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber){
 
       const obj = checkResultDlina(rMain, rFirst, rSecond, rThird,randomNumber);
-      console.log('hard obj', obj)
+
       if (obj.resVal2 == user.userValue2 && obj.resVal1 == user.userValue1 && obj.resVal3 == user.userValue3){
+        anotherExample(unitsArray)
         message.success('Верно')
         setSuccess(success+1)
         setValueInput1('')
@@ -58,8 +59,9 @@ function Hard() {
         dispatch(getRandomUnitValue1(exampleTwo)) 
         dispatch(getRandomUnitValue2(exampleTree)) 
         dispatch(getRandomUnitValue3(exampleFour)) 
+        
      
-      
+    
       } 
       else {
         message.error('Ошибка! Проверьте введенные данные еще раз!')
@@ -100,7 +102,6 @@ function Hard() {
   </div>
 <div>
 
-  
   <Input 
   className='inputValue' 
   value={valueInput2} 
@@ -112,12 +113,11 @@ function Hard() {
   </div>
   <div>
 
-  
   <Input 
   className='inputValue' 
   value={valueInput3} 
   status={state.getStatus3?'error':''} 
-   onChange={(e)=>getInputValue3(e)}  />
+  onChange={(e)=>getInputValue3(e)}  />
   
   {unit.randomUnitThird} 
 
@@ -127,7 +127,9 @@ function Hard() {
 
 
 <div className='content__block_btn'>
+
    <Button  type="primary" onClick={()=>handleCalc(unit.randomUnitMain,unit.randomUnitFirst,unit.randomUnitSecond,unit.randomUnitThird,randomNumber)}  className='btn-check' >Проверить</Button>
+
     <div className='box_btn'>
     {(success>=1 || error>=1)?<Button type='primary' className='btn-check res-btn'  onClick={()=>toSummarize()} >Подвести итог</Button>:""}
     </div>
