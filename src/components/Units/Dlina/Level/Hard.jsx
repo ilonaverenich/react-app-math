@@ -9,6 +9,7 @@ import {exampleOne, exampleTwo,exampleTree, exampleFour,anotherExample,unitsArra
 import {checkResultDlina} from '../../handleResultValue';
 
 
+
 function Hard() {
 
   const dispatch = useDispatch();
@@ -25,8 +26,6 @@ function Hard() {
   const [success,setSuccess] = useState(0)
   const [error,setError] = useState(0);
 
-  console.log(result);
-  console.log(user);
 
   let allRes = error+success;
 
@@ -47,6 +46,12 @@ function Hard() {
 
       const obj = checkResultDlina(rMain, rFirst, rSecond, rThird,randomNumber);
 
+      obj.resVal1 == user.userValue1?dispatch(getStatusFirstInput(false)):dispatch(getStatusFirstInput(true))
+
+      obj.resVal2 == user.userValue2?dispatch(getStatusSecondInput(false)):dispatch(getStatusSecondInput(true))
+
+      obj.resVal3 == user.userValue2?dispatch(getStatusThirdInput(false)):dispatch(getStatusThirdInput(true))
+
       if (obj.resVal2 == user.userValue2 && obj.resVal1 == user.userValue1 && obj.resVal3 == user.userValue3){
         anotherExample(unitsArray)
         message.success('Верно')
@@ -64,6 +69,7 @@ function Hard() {
     
       } 
       else {
+        setError(error+1)
         message.error('Ошибка! Проверьте введенные данные еще раз!')
       }
     }

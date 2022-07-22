@@ -6,7 +6,6 @@ import {setArrowBack,getStatusFirstInput,getStatusSecondInput,getStatusThirdInpu
 import {getRandomCount} from '../../redux/actions/setRandomValue';
 import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../redux/actions/setRandomDataAction';
 import {exampleOne, exampleTwo,exampleTree, exampleFour,anotherExample,unitsArray} from '../Units/handleRandomData';
- import {randomUnitMain,randomUnitFirst,randomUnitSecond,randomUnitThird} from '../Units/handleRandomData';
 
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
@@ -27,10 +26,10 @@ function Main() {
       dispatch(getRandomUnitValue2(exampleTree)) 
       dispatch(getRandomUnitValue3(exampleFour))  
     
-  /*     dispatch(getStatusFirstInput(false))
+      dispatch(getStatusFirstInput(false))
       dispatch(getStatusSecondInput(false))
       dispatch(getStatusThirdInput(false))
-       */
+    
       switch (data.value) {
          case 'massa': {
             navigate('/massa'); break;

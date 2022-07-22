@@ -1,10 +1,6 @@
 
 export function checkResultDlina (rMain, rFirst, rSecond, rThird,randomNumber){
-    console.log(rMain) //см
-    console.log(rFirst) //мм
-    console.log(rSecond) //-
-    console.log(rThird) //-
-   
+  
     let metrix ={
         мм: 1,
         см:10,

@@ -28,18 +28,15 @@ function Easy() {
     const data = useSelector((store)=>store.data)
     const state = useSelector((store)=>store.state)
 
-    console.log(unit)
-
     let allRes = error+success;
     
 
    function getInputValue (e){
-    
     dispatch(getUserValue1(e.target.value))
-    setValueInput(e.target.value) }
+    setValueInput(e.target.value) 
+  }
 
     function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber) {
-
     const obj = checkResultDlina(rMain, rFirst, rSecond, rThird,randomNumber);
   
   if (obj.resVal1 == user.userValue1){
@@ -50,13 +47,14 @@ function Easy() {
     anotherExample(unitsArray)
     dispatch(getRandomUnitMain(exampleOne)) 
     dispatch(getRandomUnitValue1(exampleTwo)) 
-
+    dispatch(getStatusFirstInput(false))
 
   }
   else {
+    dispatch(getStatusFirstInput(true))
     message.error('Неверно')
     setError(error+1)
- 
+
   }
 }
 
@@ -88,7 +86,6 @@ function toSummarize(){
                   className='inputValue' 
                   status={state.getStatus1?'error':''} 
                   value={valueInput} 
-                  onKeyDown={(e)=>e.keyCode === 13?handleCalc(unit.randomUnitMain,unit.randomUnitFirst,undefined,undefined,randomNumber):''}
                   onChange={(e)=>getInputValue(e)}/> 
               {unit.randomUnitFirst}
             
@@ -98,9 +95,7 @@ function toSummarize(){
               <Button  
                   type="primary" 
                   onClick={()=>handleCalc(unit.randomUnitMain,unit.randomUnitFirst,undefined,undefined,randomNumber)} 
-                  className='btn-check'
-        
-                  >
+                  className='btn-check'>
                 Проверить
               </Button>
 

@@ -6,6 +6,7 @@ import {getRandomCount} from '../../../../redux/actions/setRandomValue';
 import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2} from '../../../../redux/actions/setRandomDataAction';
 import {exampleOne, exampleTwo,anotherExample,unitsArray,exampleTree} from '../../handleRandomData';
 import {checkResultDlina} from '../../handleResultValue';
+import{getStatusFirstInput, getStatusSecondInput} from '../../../../redux/actions/stateAction'
 
 
 function Average() {
@@ -41,6 +42,10 @@ function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber) {
 
   const obj = checkResultDlina(rMain, rFirst, rSecond, rThird,randomNumber);
 
+  obj.resVal1 == user.userValue1?dispatch(getStatusFirstInput(false)):dispatch(getStatusFirstInput(true))
+
+  obj.resVal2 == user.userValue2?dispatch(getStatusSecondInput(false)):dispatch(getStatusSecondInput(true))
+
   if (obj.resVal1 == user.userValue1 && obj.resVal2 == user.userValue2){
     message.success('Верно')
     setSuccess(success+1)
@@ -54,9 +59,9 @@ function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber) {
   } 
   else {
     setError(error+1)
-    if (result.resultValue1!==user.valueInput1){
+   
       message.error('Ошибка! Проверьте введенные данные еще раз!')
-        }  
+      
     }
 }
 
