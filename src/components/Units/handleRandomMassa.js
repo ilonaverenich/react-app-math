@@ -8,11 +8,5 @@
       return [exampleOne=list[0],exampleTwo=list[1], exampleTree=list[2],exampleFour=list[3]] 
   }
 
-
- 
   export  {exampleOne, exampleTwo,exampleTree, exampleFour}
 
-
-
-
- console.log(exampleOne,exampleTwo)

@@ -4,8 +4,8 @@ import { Button, Radio, Select, Slider} from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {setArrowBack,getStatusFirstInput,getStatusSecondInput,getStatusThirdInput} from '../../redux/actions/stateAction';
 import {getRandomCount} from '../../redux/actions/setRandomValue';
-import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../redux/actions/setRandomDataAction';
-import {exampleOne, exampleTwo,exampleTree, exampleFour,anotherExample,unitsArray} from '../Units/handleRandomData';
+/* import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../redux/actions/setRandomDataAction'; */
+/* import {exampleOne, exampleTwo,exampleTree, exampleFour,anotherExample,unitsArray} from '../Units/handleRandomData'; */
 
 
 import Footer from '../Footer/Footer';
@@ -21,21 +21,23 @@ function Main() {
  
    function handleFunc() {
 
-     
-      anotherExample(unitsArray)
       dispatch (setArrowBack(true))
       dispatch(getRandomCount(data.count)) 
-      dispatch(getRandomUnitMain(exampleOne)) 
+/*       dispatch(getStatusFirstInput(false))
+      dispatch(getStatusSecondInput(false))
+      dispatch(getStatusThirdInput(false))  
+       anotherExample(unitsArray)
+      console.log(exampleOne) */
+     /*  dispatch(getRandomUnitMain(exampleOne)) 
       dispatch(getRandomUnitValue1(exampleTwo)) 
       dispatch(getRandomUnitValue2(exampleTree)) 
-      dispatch(getRandomUnitValue3(exampleFour))  
-    
-      dispatch(getStatusFirstInput(false))
-      dispatch(getStatusSecondInput(false))
-      dispatch(getStatusThirdInput(false))
-  console.log(data)
+      dispatch(getRandomUnitValue3(exampleFour))  */
+
+
       switch (data.value) {
          case 'massa': {
+         
+         
             navigate('/massa'); break;
          };
          case 'square': {
@@ -56,10 +58,10 @@ function Main() {
                      <div className={style.content__block__unit}>
                         <span className='content__block__subtitle'>Выберите измерение:</span>
                         <Select 
-                        className='select'
-                        defaultValue='Выберите единицу измерения' 
-                        value={data.value} 
-                        onChange={(e) => dispatch(setValue(e))}>
+                           className='select'
+                           defaultValue='Выберите единицу измерения' 
+                           value={data.value} 
+                           onChange={(e) => dispatch(setValue(e))}>
 
                            <Option value="dlina">Длина</Option>
                            <Option value="massa">Масса</Option>
@@ -100,7 +102,7 @@ function Main() {
 
                      <div className={style.content__block__btn}>
 
-                     <Button className='btn-submit' type="primary" onClick={() => handleFunc()}> Старт </Button >
+                     <Button className='btn-submit' type="primary" onClick={() => handleFunc()}> Старт </Button>
                      </div> 
                </div>
              <Footer/>

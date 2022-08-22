@@ -13,11 +13,11 @@ const navigate = useNavigate();
 const state = useSelector((store)=>store.state)
 
 function handleBack(){
-   anotherExample(unitsArray)
+/*    anotherExample(unitsArray)
    dispatch(getRandomUnitMain(exampleOne))
    dispatch(getRandomUnitValue1(exampleTwo)) 
    dispatch(getRandomUnitValue2(exampleTree)) 
-   dispatch(getRandomUnitValue3(exampleFour)) 
+   dispatch(getRandomUnitValue3(exampleFour))  */
    dispatch (setArrowBack(false))
    navigate('/')
 }

@@ -3,20 +3,11 @@ import { Input, Button, message} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 import { getUserValue1} from '../../../../redux/actions/getUserValueAction';
 import {getRandomCount} from '../../../../redux/actions/setRandomValue';
-import {getRandomUnitMain,getRandomUnitValue1} from '../../../../redux/actions/setRandomDataAction';
-import {exampleOne, exampleTwo,anotherExample,unitsArray} from '../../handleRandomData';
 import {getStatusFirstInput} from '../../../../redux/actions/stateAction';
-import {checkResultDlina} from '../../handleResultValue';
 
-
-
-
-
-
-function Easy() {
-
-
+function Easy(props) {
     const dispatch = useDispatch();
+
     const [valueInput,setValueInput] = useState('')
     const [success,setSuccess] = useState(0)
     const [error,setError] = useState(0)
@@ -24,7 +15,6 @@ function Easy() {
 
     const user = useSelector((store)=> store.userValue)
     const randomNumber = useSelector((store)=>store.randomNumber)
-    const unit = useSelector((store)=>store.unit)
     const data = useSelector((store)=>store.data)
     const state = useSelector((store)=>store.state)
 
@@ -35,28 +25,24 @@ function Easy() {
     dispatch(getUserValue1(e.target.value))
     setValueInput(e.target.value) 
   }
+  function handleCalc(){
+    console.log('Введенное значение пользователя,', user.userValue1)
+    console.log('Правильный ответ', props.result.resVal1)
 
-    function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber) {
-    const obj = checkResultDlina(rMain, rFirst, rSecond, rThird,randomNumber);
-  
-  if (obj.resVal1 == user.userValue1){
-    message.success('Верно')
-    setValueInput('')
-    setSuccess(success+1)
-    dispatch(getRandomCount(data.count))
-    anotherExample(unitsArray)
-    dispatch(getRandomUnitMain(exampleOne)) 
-    dispatch(getRandomUnitValue1(exampleTwo)) 
-    dispatch(getStatusFirstInput(false))
-
+    if (user.userValue1 == props.result.resVal1){
+      message.success('Верно!')
+      setValueInput('')
+      dispatch(getRandomCount(data.count))
+      setSuccess(success+1)
+      dispatch(getStatusFirstInput(false))
+    }
+    else{
+      
+      message.error('Попробуй еще раз')
+      dispatch(getStatusFirstInput(true))
+      setError(error+1)
+    }
   }
-  else {
-    dispatch(getStatusFirstInput(true))
-    message.error('Неверно')
-    setError(error+1)
-
-  }
-}
 
 function toSummarize(){
 
@@ -77,7 +63,7 @@ function toSummarize(){
                 {randomNumber} 
               
               <span className='unit'>
-                {unit.randomUnitMain}
+                {props.exampleOne}
                 </span>
 
               </div> 
@@ -87,14 +73,14 @@ function toSummarize(){
                   status={state.getStatus1?'error':''} 
                   value={valueInput} 
                   onChange={(e)=>getInputValue(e)}/> 
-              {unit.randomUnitFirst}
+              {props.exampleTwo}
             
             
         </div>
             <div className='content__block_btn'>
               <Button  
                   type="primary" 
-                  onClick={()=>handleCalc(unit.randomUnitMain,unit.randomUnitFirst,undefined,undefined,randomNumber)} 
+                  onClick={()=>handleCalc()}  
                   className='btn-check'>
                 Проверить
               </Button>

@@ -3,19 +3,14 @@ import { Input, Button, message} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserValue2, getUserValue1} from '../../../../redux/actions/getUserValueAction';
 import {getRandomCount} from '../../../../redux/actions/setRandomValue';
-import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2} from '../../../../redux/actions/setRandomDataAction';
-import {exampleOne, exampleTwo,anotherExample,unitsArray,exampleTree} from '../../handleRandomData';
-import {checkResultDlina} from '../../handleResultValue';
 import{getStatusFirstInput, getStatusSecondInput} from '../../../../redux/actions/stateAction'
 
 
-function Average() {
+function Average(props) {
 
   const dispatch = useDispatch();
-  const user = useSelector((store)=> store.userValue)
+
   const randomNumber = useSelector((store)=>store.randomNumber)
-  const unit = useSelector((store)=>store.unit);
-  const result = useSelector((store)=>store.result);
   const state = useSelector((store)=>store.state);
   const data = useSelector((store)=>store.data)
 
@@ -37,15 +32,26 @@ function getInputValue2 (e){
   dispatch(getUserValue2(e.target.value))
   setValueInput2(e.target.value)
 }
-function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber) {
-  console.log('unit',unit)
+function handleCalc() {
+  console.log('Значение введённое с клавиатуры', valueInput1)
+  console.log('Значение введённое с клавиатуры', valueInput2)
+  console.log('Правильный ответ', props.result)
+  valueInput1 == props.result.resVal1 ?dispatch(getStatusFirstInput(false)):dispatch(getStatusFirstInput(true))
 
-  const obj = checkResultDlina(rMain, rFirst, rSecond, rThird,randomNumber);
+  valueInput2 == props.result.resVal2 ?dispatch(getStatusSecondInput(false)):(dispatch(getStatusSecondInput(true)))
 
-  obj.resVal1 == user.userValue1?dispatch(getStatusFirstInput(false)):dispatch(getStatusFirstInput(true))
-
-  obj.resVal2 == user.userValue2?dispatch(getStatusSecondInput(false)):dispatch(getStatusSecondInput(true))
-
+  if ( valueInput1 == props.result.resVal1 &&  valueInput2 == props.result.resVal2 ){
+    message.success('Верно')  
+    dispatch(getRandomCount(data.count))
+    setSuccess(success+1)
+    setValueInput1('')
+    setValueInput2('');
+  }
+  else {
+    setError(error+1)
+    message.error('Ошибка! Проверьте введенные данные еще раз!')
+    }
+/* 
   if (obj.resVal1 == user.userValue1 && obj.resVal2 == user.userValue2){
     message.success('Верно')
     setSuccess(success+1)
@@ -62,7 +68,7 @@ function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber) {
    
       message.error('Ошибка! Проверьте введенные данные еще раз!')
       
-    }
+    }  */
 }
 
 function toSummarize(){
@@ -80,7 +86,7 @@ function toSummarize(){
         <div className='content__block_average_value'>
 
           <div className='column_number'>
-            {randomNumber} {unit.randomUnitMain} =
+            {randomNumber} {props.exampleOne} =
           </div>
 
 
@@ -92,7 +98,7 @@ function toSummarize(){
               status={state.getStatus1?'error':''} 
               onChange={(e)=>getInputValue1(e)}/>
 
-              {unit.randomUnitFirst}
+              {props.exampleTwo}
 
             </div>
           <div>
@@ -104,7 +110,7 @@ function toSummarize(){
             status={state.getStatus2?'error':''} 
             onChange={(e)=>getInputValue2(e)} />
             
-            {unit.randomUnitSecond} 
+            {props.exampleTree} 
 
             </div>
           </div>
@@ -115,7 +121,8 @@ function toSummarize(){
 
              <Button 
               type="primary" 
-              onClick={()=>handleCalc(unit.randomUnitMain,unit.randomUnitFirst,unit.randomUnitSecond,unit.randomUnitThird,randomNumber)} className='btn-check' >
+              onClick={()=>handleCalc()} 
+              className='btn-check'>
                 Проверить
                 </Button>
 
@@ -136,4 +143,4 @@ function toSummarize(){
   )
 }
 
-export default Average 
+export default React.memo(Average)

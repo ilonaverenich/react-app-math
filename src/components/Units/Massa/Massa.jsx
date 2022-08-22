@@ -9,7 +9,7 @@ import Hard from '../Dlina/Level/Hard';
 
 function Massa() {
   const data = useSelector((store) => store.data);
-
+  anotherExample(unitsArray)
 
 /*   function handleCalc(){
    anotherExample(unitsArray)
@@ -23,7 +23,7 @@ function Massa() {
         <div className='content__info'>
         <i><b>ВНИМАНИЕ!</b> Десятичные дроби вводятся через точку. Например: 0.003</i>
         </div>
-        {data.level =='light'? <Easy />:data.level =='average'? <Average />: <Hard />}
+        {data.level =='light'? <Easy exampleOne={exampleOne} exampleTwo={exampleTwo} />:data.level =='average'? <Average />: <Hard />}
 
      {/* {data.level =='light'? <Easy/>:data.level =='average'? <Average/>: <Hard/> }*/}
 
