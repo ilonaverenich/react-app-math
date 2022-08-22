@@ -14,14 +14,13 @@ function Average(props) {
   const state = useSelector((store)=>store.state);
   const data = useSelector((store)=>store.data)
 
+
   const [valueInput1,setValueInput1] = useState('')
   const [valueInput2,setValueInput2] = useState('')
   const [success,setSuccess] = useState(0)
   const [error,setError] = useState(0)
   
   let allRes = error+success;
-
-
 
 function getInputValue1 (e){
   dispatch(getUserValue1(e.target.value))
@@ -33,9 +32,9 @@ function getInputValue2 (e){
   setValueInput2(e.target.value)
 }
 function handleCalc() {
-  console.log('Значение введённое с клавиатуры', valueInput1)
-  console.log('Значение введённое с клавиатуры', valueInput2)
+
   console.log('Правильный ответ', props.result)
+
   valueInput1 == props.result.resVal1 ?dispatch(getStatusFirstInput(false)):dispatch(getStatusFirstInput(true))
 
   valueInput2 == props.result.resVal2 ?dispatch(getStatusSecondInput(false)):(dispatch(getStatusSecondInput(true)))
@@ -45,30 +44,15 @@ function handleCalc() {
     dispatch(getRandomCount(data.count))
     setSuccess(success+1)
     setValueInput1('')
-    setValueInput2('');
+    setValueInput2('')
+
   }
   else {
+
     setError(error+1)
     message.error('Ошибка! Проверьте введенные данные еще раз!')
+
     }
-/* 
-  if (obj.resVal1 == user.userValue1 && obj.resVal2 == user.userValue2){
-    message.success('Верно')
-    setSuccess(success+1)
-    setValueInput1('')
-    setValueInput2('');
-    anotherExample(unitsArray)
-    dispatch(getRandomCount(data.count))
-    dispatch(getRandomUnitMain(exampleOne))
-    dispatch(getRandomUnitValue1(exampleTwo)) 
-    dispatch(getRandomUnitValue2(exampleTree)) 
-  } 
-  else {
-    setError(error+1)
-   
-      message.error('Ошибка! Проверьте введенные данные еще раз!')
-      
-    }  */
 }
 
 function toSummarize(){
@@ -136,7 +120,7 @@ function toSummarize(){
 
         <div className='content__block_info'>
                 <p>Количество правильных ответов: <span className='count'>{success}</span> </p>
-                <p>Количество неправильных ответов:<span className='count'> {error}</span></p>
+                <p>Количество неправильных ответов:<span className='count'>{error}</span></p>
         </div>
 
     </div>

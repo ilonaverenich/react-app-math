@@ -1,12 +1,11 @@
 
-export function checkResultSquare (rMain, rFirst, rSecond, rThird,randomNumber){
+export function checkResultMassa (rMain, rFirst, rSecond, rThird,randomNumber){
   
     let metrix ={
-        'кв.см': 1,
-        'кв.дм':100,
-        'кв.м':10000,
-        'а':1000000,
-        'га':100000000
+        'г': 1,
+        'ц':100,
+        'кг':10000,
+        'т':1000000
       }
       let obj ={
         resVal1: '',

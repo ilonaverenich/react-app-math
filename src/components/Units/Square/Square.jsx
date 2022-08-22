@@ -23,7 +23,26 @@ function Square() {
          <div className='content'>
             <Header level={data.level}/>
                <div className='content__info'><i><b>ВНИМАНИЕ!</b> Десятичные дроби вводятся через точку. Например: 0.003</i></div>
-               {data.level =='light'? <Easy exampleOne={exampleOne} exampleTwo={exampleTwo}/>:data.level =='average'? <Average/>: <Hard/> } 
+               {data.level =='light'? 
+               <Easy 
+                  exampleOne={exampleOne} 
+                  exampleTwo={exampleTwo}
+                  result= {obj}
+               />:
+               data.level =='average'? 
+               <Average
+                  exampleOne={exampleOne} 
+                  exampleTwo={exampleTwo} 
+                  exampleTree={exampleTree}
+                  result= {obj}
+               />:
+               <Hard
+                  exampleOne={exampleOne} 
+                  exampleTwo={exampleTwo} 
+                  exampleTree={exampleTree} 
+                  exampleFour={exampleFour}
+                  result= {obj}
+               /> } 
             <Footer/>
          </div>  
     </div>

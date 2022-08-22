@@ -4,19 +4,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getUserValue2, getUserValue1, getUserValue3} from '../../../../redux/actions/getUserValueAction';
 import {getStatusFirstInput,getStatusSecondInput, getStatusThirdInput} from '../../../../redux/actions/stateAction';
 import {getRandomCount} from '../../../../redux/actions/setRandomValue';
-import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../../../redux/actions/setRandomDataAction';
-import {exampleOne, exampleTwo,exampleTree, exampleFour,anotherExample,unitsArray} from '../../handleRandomData';
-import {checkResultDlina} from '../../handleResultValue';
 
 
-
-function Hard() {
+function Hard(props) {
 
   const dispatch = useDispatch();
-  const user = useSelector((store)=> store.userValue)
+ 
   const randomNumber = useSelector((store)=>store.randomNumber)
-  const unit = useSelector((store)=>store.unit);
-  const result = useSelector((store)=>store.result);
   const state = useSelector((store)=>store.state);
   const data = useSelector((store)=>store.data)
 
@@ -26,12 +20,11 @@ function Hard() {
   const [success,setSuccess] = useState(0)
   const [error,setError] = useState(0);
 
-
-  let allRes = error+success;
+  let allRes = error + success;
 
   function getInputValue1 (e){
     dispatch(getUserValue1(e.target.value))
-     setValueInput1(e.target.value)
+    setValueInput1(e.target.value)
   
   }
   function getInputValue2 (e){
@@ -40,38 +33,32 @@ function Hard() {
   }
   function getInputValue3 (e){
     dispatch(getUserValue3(e.target.value))
-     setValueInput3(e.target.value)
-    }
-    function handleCalc(rMain, rFirst, rSecond, rThird,randomNumber){
+    setValueInput3(e.target.value)
+  }
 
-      const obj = checkResultDlina(rMain, rFirst, rSecond, rThird,randomNumber);
 
-      obj.resVal1 == user.userValue1?dispatch(getStatusFirstInput(false)):dispatch(getStatusFirstInput(true))
+    function handleCalc(){
 
-      obj.resVal2 == user.userValue2?dispatch(getStatusSecondInput(false)):dispatch(getStatusSecondInput(true))
+      valueInput1 == props.result.resVal1 ?dispatch(getStatusFirstInput(false)):dispatch(getStatusFirstInput(true))
 
-      obj.resVal3 == user.userValue2?dispatch(getStatusThirdInput(false)):dispatch(getStatusThirdInput(true))
+      valueInput2 == props.result.resVal2 ?dispatch(getStatusSecondInput(false)):(dispatch(getStatusSecondInput(true)))
 
-      if (obj.resVal2 == user.userValue2 && obj.resVal1 == user.userValue1 && obj.resVal3 == user.userValue3){
-        anotherExample(unitsArray)
+      valueInput3 == props.result.resVal3 ?dispatch(getStatusThirdInput(false)):(dispatch(getStatusThirdInput(true)))
+
+      if ( valueInput1 == props.result.resVal1 &&  valueInput2 == props.result.resVal2 && valueInput3 == props.result.resVal3){
+        console.log('Правильный ответ', props.result)
         message.success('Верно')
         setSuccess(success+1)
+        dispatch(getRandomCount(data.count))
         setValueInput1('')
         setValueInput2('')
         setValueInput3('')
-        dispatch(getRandomCount(data.count))
-        dispatch(getRandomUnitMain(exampleOne))
-        dispatch(getRandomUnitValue1(exampleTwo)) 
-        dispatch(getRandomUnitValue2(exampleTree)) 
-        dispatch(getRandomUnitValue3(exampleFour)) 
-        
-     
-    
-      } 
-      else {
+      }
+      else{
         setError(error+1)
         message.error('Ошибка! Проверьте введенные данные еще раз!')
       }
+
     }
     
     function toSummarize(){
@@ -91,7 +78,7 @@ function Hard() {
        <div className='content__block_average_value'>
 
 <div className='column_number'>
- {randomNumber} {unit.randomUnitMain}  =
+ {randomNumber} {props.exampleOne}  =
 </div>
 
 
@@ -103,7 +90,7 @@ function Hard() {
     status={state.getStatus1?'error':''} 
     onChange={(e)=>getInputValue1(e)} />
 
-   {unit.randomUnitFirst} 
+    {props.exampleTwo}
 
   </div>
 <div>
@@ -114,7 +101,7 @@ function Hard() {
   status={state.getStatus2?'error':''} 
    onChange={(e)=>getInputValue2(e)} />
   
-  {unit.randomUnitSecond} 
+  {props.exampleTree} 
 
   </div>
   <div>
@@ -125,7 +112,7 @@ function Hard() {
   status={state.getStatus3?'error':''} 
   onChange={(e)=>getInputValue3(e)}  />
   
-  {unit.randomUnitThird} 
+  {props.exampleFour} 
 
   </div>
 </div>
@@ -134,10 +121,10 @@ function Hard() {
 
 <div className='content__block_btn'>
 
-   <Button  type="primary" onClick={()=>handleCalc(unit.randomUnitMain,unit.randomUnitFirst,unit.randomUnitSecond,unit.randomUnitThird,randomNumber)}  className='btn-check' >Проверить</Button>
+   <Button  type="primary" onClick={()=>handleCalc()}  className='btn-check' >Проверить</Button>
 
     <div className='box_btn'>
-    {(success>=1 || error>=1)?<Button type='primary' className='btn-check res-btn'  onClick={()=>toSummarize()} >Подвести итог</Button>:""}
+       {(success>=1 || error>=1)?<Button type='primary' className='btn-check res-btn'  onClick={()=>toSummarize()} >Подвести итог</Button>:""}
     </div>
   </div>
 
@@ -149,4 +136,4 @@ function Hard() {
   )
 }
 
-export default Hard
+export default React.memo(Hard)

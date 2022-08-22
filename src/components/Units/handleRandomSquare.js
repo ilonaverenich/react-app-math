@@ -1,5 +1,5 @@
 
- export let unitsArray = ['кв.мм', 'кв.см', 'кв.дм', 'кв.м', 'кв.км'];
+ export let unitsArray = [ 'кв.см', 'кв.дм', 'кв.м','а', 'га'];
  let exampleOne, exampleTwo,exampleTree,exampleFour;
 
  export function anotherExample(params) {

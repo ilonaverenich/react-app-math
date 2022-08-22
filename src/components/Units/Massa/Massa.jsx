@@ -6,10 +6,13 @@ import {anotherExample,exampleOne, exampleTwo,exampleTree, exampleFour,unitsArra
 import Easy from '../Dlina/Level/Easy';
 import Average from '../Dlina/Level/Average';
 import Hard from '../Dlina/Level/Hard';
+import {checkResultMassa} from '../../Units/handleResultValueMassa'
 
 function Massa() {
   const data = useSelector((store) => store.data);
   anotherExample(unitsArray)
+  const randomNumber =  useSelector((store)=>store.randomNumber)
+  let obj = checkResultMassa(exampleOne,exampleTwo,exampleTree,exampleFour,randomNumber)
 
 /*   function handleCalc(){
    anotherExample(unitsArray)
@@ -23,7 +26,27 @@ function Massa() {
         <div className='content__info'>
         <i><b>ВНИМАНИЕ!</b> Десятичные дроби вводятся через точку. Например: 0.003</i>
         </div>
-        {data.level =='light'? <Easy exampleOne={exampleOne} exampleTwo={exampleTwo} />:data.level =='average'? <Average />: <Hard />}
+        {data.level =='light'?
+         <Easy 
+            exampleOne={exampleOne} 
+            exampleTwo={exampleTwo} 
+            result= {obj}
+         />:
+         data.level =='average'? 
+         <Average
+            exampleOne={exampleOne} 
+            exampleTwo={exampleTwo} 
+            exampleTree={exampleTree}
+            result= {obj}
+          />
+         : 
+         <Hard 
+            exampleOne={exampleOne} 
+            exampleTwo={exampleTwo} 
+            exampleTree={exampleTree} 
+            exampleFour={exampleFour}
+            result= {obj}
+                  />}
 
      {/* {data.level =='light'? <Easy/>:data.level =='average'? <Average/>: <Hard/> }*/}
 

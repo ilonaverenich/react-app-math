@@ -19,7 +19,7 @@ function Easy(props) {
     const state = useSelector((store)=>store.state)
 
     let allRes = error+success;
-    
+    console.log(data.count)
 
    function getInputValue (e){
     dispatch(getUserValue1(e.target.value))
@@ -33,11 +33,10 @@ function Easy(props) {
       message.success('Верно!')
       setValueInput('')
       dispatch(getRandomCount(data.count))
-      setSuccess(success+1)
       dispatch(getStatusFirstInput(false))
-    }
+      setSuccess(success+1)
+  }
     else{
-      
       message.error('Попробуй еще раз')
       dispatch(getStatusFirstInput(true))
       setError(error+1)
@@ -45,13 +44,11 @@ function Easy(props) {
   }
 
 function toSummarize(){
-
   message.info({
     className:'cusstom-class',
     content: `Всего попыток: ${allRes}. Из них правильных -  ${success} - ${(success/allRes*100).toFixed(1)}%, неправильных -  ${error} - ${(error/allRes*100).toFixed(1)}%`,
     duration:4
   })
-
 }
     
     return (
@@ -60,7 +57,7 @@ function toSummarize(){
         <div className='content__block_easy_value'>
           
               <div className='randomUnit'>
-                {randomNumber} 
+              {randomNumber}
               
               <span className='unit'>
                 {props.exampleOne}
