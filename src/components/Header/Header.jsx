@@ -1,8 +1,6 @@
 import {useSelector, useDispatch} from 'react-redux';
 import {setArrowBack} from '../../redux/actions/stateAction'
 import { useNavigate } from "react-router-dom";
-import {exampleOne, exampleTwo,anotherExample,unitsArray,exampleTree,exampleFour} from '../Units/handleRandomData';
-import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../redux/actions/setRandomDataAction'
 
 function Header(props) {
    
@@ -13,11 +11,6 @@ const navigate = useNavigate();
 const state = useSelector((store)=>store.state)
 
 function handleBack(){
-/*    anotherExample(unitsArray)
-   dispatch(getRandomUnitMain(exampleOne))
-   dispatch(getRandomUnitValue1(exampleTwo)) 
-   dispatch(getRandomUnitValue2(exampleTree)) 
-   dispatch(getRandomUnitValue3(exampleFour))  */
    dispatch (setArrowBack(false))
    navigate('/')
 }
