@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Radio, Select, Slider} from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {setArrowBack,getStatusFirstInput,getStatusSecondInput,getStatusThirdInput} from '../../redux/actions/stateAction';
-import {getRandomCount} from '../../redux/actions/setRandomValue';
+import getRandom from '../Units/handleRandomValue'
+import {getMaxCount} from '../../redux/actions/setRandomValue'
+import {changeMaxValue} from '../../redux/actions/getMaxValueAction'
 
 
 
@@ -16,14 +18,21 @@ function Main() {
    const navigate = useNavigate();
    const { Option } = Select;
    const dispatch = useDispatch();
-   const data = useSelector((store) => store.data);
-   const [random, setRandom] = useState(10)
-   const randomNumber =  useSelector((store)=>store.randomNumber)
+   const data = useSelector((store) => store.data);   
+   /* const zzz = useSelector((store) => store.maxCount); */
+   const [maxCount, setMaxCount] = useState(10)
+
+   
  
    function handleFunc() {
-     console.log(random)
+      
       dispatch (setArrowBack(true))
-      dispatch(getRandomCount(random)) 
+       let randomValue =  getRandom(maxCount)
+      dispatch(setCountNum(randomValue)) 
+      dispatch(getMaxCount(maxCount)) 
+      dispatch(changeMaxValue(maxCount))
+
+
       dispatch(getStatusFirstInput(false))
       dispatch(getStatusSecondInput(false))
       dispatch(getStatusThirdInput(false))
@@ -82,14 +91,15 @@ function Main() {
                      </div>
 
                      <div className={style.content__block__slider}>
-                        <span className='content__block__subtitle'>Выберите промежуток: [1, {random}]</span>
+                        <span className='content__block__subtitle'>Выберите промежуток: [1, {maxCount}]</span>
 
                         <Slider 
                            className='slider' 
                            defaultValue={10} 
-                           value={random} 
+                           value={maxCount} 
                            max={1000}
-                           onChange={(e) => setRandom(e)} min={1} />
+                           onChange={(e) => setMaxCount(e)} min={1} 
+                           />
                      </div>
 
                      <div className={style.content__block__btn}>

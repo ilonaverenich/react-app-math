@@ -2,8 +2,9 @@ import React, {useState} from 'react'
 import { Input, Button, message} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 import { getUserValue1} from '../../../../redux/actions/getUserValueAction';
-import {getRandomCount} from '../../../../redux/actions/setRandomValue';
 import {getStatusFirstInput} from '../../../../redux/actions/stateAction';
+import getRandom from '../../../Units/handleRandomValue';
+import {setCountNum } from '../../../../redux/actions/setTextAction'
 
 function Easy(props) {
     const dispatch = useDispatch();
@@ -12,27 +13,26 @@ function Easy(props) {
     const [success,setSuccess] = useState(0)
     const [error,setError] = useState(0)
 
-
     const user = useSelector((store)=> store.userValue)
-    const randomNumber = useSelector((store)=>store.randomNumber)
     const data = useSelector((store)=>store.data)
     const state = useSelector((store)=>store.state)
 
+    const max = useSelector((store)=>store.max)
+
+   
     let allRes = error+success;
-    console.log(data.count)
 
    function getInputValue (e){
     dispatch(getUserValue1(e.target.value))
     setValueInput(e.target.value) 
   }
+  
   function handleCalc(){
-    console.log('Введенное значение пользователя,', user.userValue1)
-    console.log('Правильный ответ', props.result.resVal1)
-
+ 
     if (user.userValue1 == props.result.resVal1){
       message.success('Верно!')
       setValueInput('')
-      dispatch(getRandomCount(data.count))
+      dispatch(setCountNum(getRandom(max))) 
       dispatch(getStatusFirstInput(false))
       setSuccess(success+1)
   }
@@ -57,7 +57,7 @@ function toSummarize(){
         <div className='content__block_easy_value'>
           
               <div className='randomUnit'>
-              {randomNumber}
+              {data.count} 
               
               <span className='unit'>
                 {props.exampleOne}
@@ -95,4 +95,4 @@ function toSummarize(){
   )
 }
 
-export default React.memo(Easy);
+export default Easy;

@@ -7,17 +7,15 @@ import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import {exampleOne, exampleTwo,exampleTree, exampleFour,anotherExample,unitsArray} from '../../Units/handleRandomData';
 import {checkResultDlina} from '../../Units/handleResultValue'
-/* import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../../redux/actions/setRandomDataAction'; */
+import {getMaxCount} from '../../../redux/actions/setRandomValue'
+
 
 function Dlina() {
    const dispatch = useDispatch()
-   anotherExample(unitsArray)
-
-   const randomNumber =  useSelector((store)=>store.randomNumber)
-   let obj = checkResultDlina(exampleOne,exampleTwo,exampleTree,exampleFour,randomNumber)
-   console.log('результат в длине изи уровень:', obj)
-
+   anotherExample(unitsArray) 
    const data = useSelector((store) => store.data);
+   dispatch(getMaxCount(data.count))
+   let obj = checkResultDlina(exampleOne,exampleTwo,exampleTree,exampleFour,data.count)
    
 return (
      <div className='wrapper'>

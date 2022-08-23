@@ -1,8 +1,8 @@
-import {SET_RANDOM_VALUE} from "./actionTypes"
+import {GET_MAX_COUNT} from "./actionTypes"
 
-export const getRandomCount = data =>{
+export const getMaxCount = data =>{
    return {
-      type: SET_RANDOM_VALUE,
+      type: GET_MAX_COUNT,
       payload: data
    }
 }

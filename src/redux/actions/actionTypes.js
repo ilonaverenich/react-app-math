@@ -12,8 +12,9 @@ export const GET_USER_VALUE_INPUT1 = 'GET_USER_VALUE_INPUT1';
 export const GET_USER_VALUE_INPUT2 = 'GET_USER_VALUE_INPUT2';
 export const GET_USER_VALUE_INPUT3 = 'GET_USER_VALUE_INPUT3';
 
-//Хранение случайных чисел
-export const SET_RANDOM_VALUE = 'SET_RANDOM_VALUE';
+//Хранение максимального числа из диапазона значений
+export const GET_MAX_COUNT = 'GET_MAX_COUNT';
+export const MAX_VALUE ='MAX_VALUE';
 
 //Харанение случайных измерений
 

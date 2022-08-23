@@ -5,17 +5,17 @@ import Easy from '../Dlina/Level/Easy';
 import Average from '../Dlina/Level/Average';
 import Hard from '../Dlina/Level/Hard';
 import {exampleOne, exampleTwo,exampleTree, exampleFour,anotherExample,unitsArray} from '../../Units/handleRandomSquare';
-import {getRandomUnitMain,getRandomUnitValue1,getRandomUnitValue2,getRandomUnitValue3} from '../../../redux/actions/setRandomDataAction';
+
 import {checkResultSquare} from '../../Units/handleResultValueSquare'
 
 function Square() {
    const dispatch = useDispatch();
    anotherExample(unitsArray)
-   const randomNumber =  useSelector((store)=>store.randomNumber)
-   let obj = checkResultSquare(exampleOne,exampleTwo,exampleTree,exampleFour,randomNumber)
+   const data = useSelector((store) => store.data);
+   let obj = checkResultSquare(exampleOne,exampleTwo,exampleTree,exampleFour,data.count)
    console.log('результат в площади изи уровень:', obj)
    
-   const data = useSelector((store) => store.data);
+   
    const unit =useSelector((store)=>store.unit )
    console.log(unit)
    return (

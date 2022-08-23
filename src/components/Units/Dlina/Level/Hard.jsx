@@ -3,17 +3,17 @@ import { Input, Button, message} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserValue2, getUserValue1, getUserValue3} from '../../../../redux/actions/getUserValueAction';
 import {getStatusFirstInput,getStatusSecondInput, getStatusThirdInput} from '../../../../redux/actions/stateAction';
-import {getRandomCount} from '../../../../redux/actions/setRandomValue';
+import getRandom from '../../../Units/handleRandomValue';
+import {setCountNum } from '../../../../redux/actions/setTextAction'
 
 
 function Hard(props) {
 
   const dispatch = useDispatch();
  
-  const randomNumber = useSelector((store)=>store.randomNumber)
   const state = useSelector((store)=>store.state);
   const data = useSelector((store)=>store.data)
-
+  const max = useSelector((store)=>store.max)
   const [valueInput1,setValueInput1] = useState('')
   const [valueInput2,setValueInput2] = useState('')
   const [valueInput3,setValueInput3] = useState('')
@@ -49,7 +49,7 @@ function Hard(props) {
         console.log('Правильный ответ', props.result)
         message.success('Верно')
         setSuccess(success+1)
-        dispatch(getRandomCount(data.count))
+        dispatch(setCountNum(getRandom(max))) 
         setValueInput1('')
         setValueInput2('')
         setValueInput3('')
@@ -78,7 +78,7 @@ function Hard(props) {
        <div className='content__block_average_value'>
 
 <div className='column_number'>
- {randomNumber} {props.exampleOne}  =
+ {data.count} {props.exampleOne}  =
 </div>
 
 

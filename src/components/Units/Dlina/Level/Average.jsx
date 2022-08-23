@@ -2,18 +2,19 @@ import React, {useState} from 'react'
 import { Input, Button, message} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserValue2, getUserValue1} from '../../../../redux/actions/getUserValueAction';
-import {getRandomCount} from '../../../../redux/actions/setRandomValue';
+/* import {getRandomCount} from '../../../../redux/actions/setRandomValue'; */
 import{getStatusFirstInput, getStatusSecondInput} from '../../../../redux/actions/stateAction'
+import getRandom from '../../../Units/handleRandomValue';
+import {setCountNum } from '../../../../redux/actions/setTextAction'
 
 
 function Average(props) {
 
   const dispatch = useDispatch();
 
-  const randomNumber = useSelector((store)=>store.randomNumber)
   const state = useSelector((store)=>store.state);
   const data = useSelector((store)=>store.data)
-
+  const max = useSelector((store)=>store.max)
 
   const [valueInput1,setValueInput1] = useState('')
   const [valueInput2,setValueInput2] = useState('')
@@ -33,15 +34,13 @@ function getInputValue2 (e){
 }
 function handleCalc() {
 
-  console.log('Правильный ответ', props.result)
-
   valueInput1 == props.result.resVal1 ?dispatch(getStatusFirstInput(false)):dispatch(getStatusFirstInput(true))
 
   valueInput2 == props.result.resVal2 ?dispatch(getStatusSecondInput(false)):(dispatch(getStatusSecondInput(true)))
 
   if ( valueInput1 == props.result.resVal1 &&  valueInput2 == props.result.resVal2 ){
     message.success('Верно')  
-    dispatch(getRandomCount(data.count))
+    dispatch(setCountNum(getRandom(max))) 
     setSuccess(success+1)
     setValueInput1('')
     setValueInput2('')
@@ -70,7 +69,7 @@ function toSummarize(){
         <div className='content__block_average_value'>
 
           <div className='column_number'>
-            {randomNumber} {props.exampleOne} =
+          {data.count}  {props.exampleOne} =
           </div>
 
 

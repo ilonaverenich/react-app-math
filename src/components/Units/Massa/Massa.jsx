@@ -10,9 +10,10 @@ import {checkResultMassa} from '../../Units/handleResultValueMassa'
 
 function Massa() {
   const data = useSelector((store) => store.data);
+  console.log(data)
   anotherExample(unitsArray)
-  const randomNumber =  useSelector((store)=>store.randomNumber)
-  let obj = checkResultMassa(exampleOne,exampleTwo,exampleTree,exampleFour,randomNumber)
+
+  let obj = checkResultMassa(exampleOne,exampleTwo,exampleTree,exampleFour,data.count)
 
 /*   function handleCalc(){
    anotherExample(unitsArray)
