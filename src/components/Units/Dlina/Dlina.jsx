@@ -1,5 +1,4 @@
-import { useSelector,useDispatch} from 'react-redux';
-
+import { useSelector} from 'react-redux';
 import Easy from './Level/Easy';
 import Average from './Level/Average'
 import Hard from './Level/Hard';
@@ -7,14 +6,11 @@ import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import {exampleOne, exampleTwo,exampleTree, exampleFour,anotherExample,unitsArray} from '../../Units/handleRandomData';
 import {checkResultDlina} from '../../Units/handleResultValue'
-import {getMaxCount} from '../../../redux/actions/setRandomValue'
 
 
 function Dlina() {
-   const dispatch = useDispatch()
    anotherExample(unitsArray) 
    const data = useSelector((store) => store.data);
-   dispatch(getMaxCount(data.count))
    let obj = checkResultDlina(exampleOne,exampleTwo,exampleTree,exampleFour,data.count)
    
 return (

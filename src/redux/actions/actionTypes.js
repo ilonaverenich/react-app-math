@@ -13,7 +13,6 @@ export const GET_USER_VALUE_INPUT2 = 'GET_USER_VALUE_INPUT2';
 export const GET_USER_VALUE_INPUT3 = 'GET_USER_VALUE_INPUT3';
 
 //Хранение максимального числа из диапазона значений
-export const GET_MAX_COUNT = 'GET_MAX_COUNT';
 export const MAX_VALUE ='MAX_VALUE';
 
 //Харанение случайных измерений

@@ -35,9 +35,7 @@ function Hard(props) {
     dispatch(getUserValue3(e.target.value))
     setValueInput3(e.target.value)
   }
-
-
-    function handleCalc(){
+  function handleCalc(){
 
       valueInput1 == props.result.resVal1 ?dispatch(getStatusFirstInput(false)):dispatch(getStatusFirstInput(true))
 
@@ -61,78 +59,77 @@ function Hard(props) {
 
     }
     
-    function toSummarize(){
-    
+  function toSummarize(){
       dispatch(getStatusFirstInput(false))
       dispatch(getStatusSecondInput(false))
-      message.info({
-        className:'cusstom-class',
-        content: `Всего попыток: ${allRes}. Из них правильных -  ${success} - ${(success/allRes*100).toFixed(1)}%, неправильных -  ${error} - ${(error/allRes*100).toFixed(1)}%`,
-        duration:4
-      })
-    
+        message.info({
+          className:'cusstom-class',
+          content: `Всего попыток: ${allRes}. Из них правильных -  ${success} - ${(success/allRes*100).toFixed(1)}%, неправильных -  ${error} - ${(error/allRes*100).toFixed(1)}%`,
+          duration:4
+        })
+      
     }
 
   return (
+
     <div className='content__block'>
-       <div className='content__block_average_value'>
+    <div className='content__block_average_value'>
 
-<div className='column_number'>
- {data.count} {props.exampleOne}  =
-</div>
+    <div className='column_number'>
+    {data.count} {props.exampleOne}  =
+    </div>
 
 
-<div className='column_value'>
-  <div >
+    <div className='column_value'>
+      <div >
     <Input 
-    className='inputValue' 
-    value={valueInput1} 
-    status={state.getStatus1?'error':''} 
-    onChange={(e)=>getInputValue1(e)} />
+        className='inputValue' 
+        value={valueInput1} 
+        status={state.getStatus1?'error':''} 
+        onChange={(e)=>getInputValue1(e)} />
+             
+        {props.exampleTwo}  
 
-    {props.exampleTwo}
-
-  </div>
-<div>
-
-  <Input 
-  className='inputValue' 
-  value={valueInput2} 
-  status={state.getStatus2?'error':''} 
-   onChange={(e)=>getInputValue2(e)} />
-  
-  {props.exampleTree} 
-
-  </div>
-  <div>
+      </div>
+    <div>
 
   <Input 
-  className='inputValue' 
-  value={valueInput3} 
-  status={state.getStatus3?'error':''} 
-  onChange={(e)=>getInputValue3(e)}  />
+      className='inputValue' 
+      value={valueInput2} 
+      status={state.getStatus2?'error':''} 
+      onChange={(e)=>getInputValue2(e)} />
   
-  {props.exampleFour} 
+     {props.exampleTree} 
 
   </div>
-</div>
-</div>
+      <div>
 
+        <Input 
+        className='inputValue' 
+        value={valueInput3} 
+        status={state.getStatus3?'error':''} 
+        onChange={(e)=>getInputValue3(e)}  />
+        
+        {props.exampleFour} 
 
-<div className='content__block_btn'>
+      </div>
+</div>
+    </div>
+
+    <div className='content__block_btn'>
 
    <Button  type="primary" onClick={()=>handleCalc()}  className='btn-check' >Проверить</Button>
 
     <div className='box_btn'>
        {(success>=1 || error>=1)?<Button type='primary' className='btn-check res-btn'  onClick={()=>toSummarize()} >Подвести итог</Button>:""}
     </div>
-  </div>
+   </div>
 
-<div className='content__block_info'>
+    <div className='content__block_info'>
       <p>Количество правильных ответов: <span className='count'>{success}</span> </p>
       <p>Количество неправильных ответов:<span className='count'> {error}</span></p>
- </div>
     </div>
+  </div>
   )
 }
 

@@ -1,5 +1,4 @@
 import { useSelector} from 'react-redux';
-
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import {anotherExample,exampleOne, exampleTwo,exampleTree, exampleFour,unitsArray} from '../handleRandomMassa'
@@ -10,24 +9,18 @@ import {checkResultMassa} from '../../Units/handleResultValueMassa'
 
 function Massa() {
   const data = useSelector((store) => store.data);
-  console.log(data)
   anotherExample(unitsArray)
-
   let obj = checkResultMassa(exampleOne,exampleTwo,exampleTree,exampleFour,data.count)
-
-/*   function handleCalc(){
-   anotherExample(unitsArray)
-   console.log(exampleOne, exampleTwo,exampleTree, exampleFour)
-  } */
    
    return (
       <div className='wrapper'> 
-      <div className='content'>
-        <Header level={data.level}/>
+         <div className='content'>
+            <Header level={data.level}/>
         <div className='content__info'>
-        <i><b>ВНИМАНИЕ!</b> Десятичные дроби вводятся через точку. Например: 0.003</i>
+            <i><b>ВНИМАНИЕ!</b> Десятичные дроби вводятся через точку. Например: 0.003</i>
         </div>
-        {data.level =='light'?
+        {data.level =='light'
+               ?
          <Easy 
             exampleOne={exampleOne} 
             exampleTwo={exampleTwo} 
@@ -40,7 +33,7 @@ function Massa() {
             exampleTree={exampleTree}
             result= {obj}
           />
-         : 
+             : 
          <Hard 
             exampleOne={exampleOne} 
             exampleTwo={exampleTwo} 
@@ -48,8 +41,6 @@ function Massa() {
             exampleFour={exampleFour}
             result= {obj}
                   />}
-
-     {/* {data.level =='light'? <Easy/>:data.level =='average'? <Average/>: <Hard/> }*/}
 
         <Footer/>
      </div> 

@@ -9,40 +9,35 @@ import {exampleOne, exampleTwo,exampleTree, exampleFour,anotherExample,unitsArra
 import {checkResultSquare} from '../../Units/handleResultValueSquare'
 
 function Square() {
-   const dispatch = useDispatch();
    anotherExample(unitsArray)
    const data = useSelector((store) => store.data);
    let obj = checkResultSquare(exampleOne,exampleTwo,exampleTree,exampleFour,data.count)
-   console.log('результат в площади изи уровень:', obj)
-   
-   
-   const unit =useSelector((store)=>store.unit )
-   console.log(unit)
+
    return (
     <div className='wrapper'>
          <div className='content'>
             <Header level={data.level}/>
                <div className='content__info'><i><b>ВНИМАНИЕ!</b> Десятичные дроби вводятся через точку. Например: 0.003</i></div>
                {data.level =='light'? 
-               <Easy 
-                  exampleOne={exampleOne} 
-                  exampleTwo={exampleTwo}
-                  result= {obj}
-               />:
-               data.level =='average'? 
-               <Average
-                  exampleOne={exampleOne} 
-                  exampleTwo={exampleTwo} 
-                  exampleTree={exampleTree}
-                  result= {obj}
-               />:
-               <Hard
-                  exampleOne={exampleOne} 
-                  exampleTwo={exampleTwo} 
-                  exampleTree={exampleTree} 
-                  exampleFour={exampleFour}
-                  result= {obj}
-               /> } 
+                  <Easy 
+                     exampleOne={exampleOne} 
+                     exampleTwo={exampleTwo}
+                     result= {obj}
+                  />:
+                  data.level =='average'? 
+                  <Average
+                     exampleOne={exampleOne} 
+                     exampleTwo={exampleTwo} 
+                     exampleTree={exampleTree}
+                     result= {obj}
+                  />:
+                  <Hard
+                     exampleOne={exampleOne} 
+                     exampleTwo={exampleTwo} 
+                     exampleTree={exampleTree} 
+                     exampleFour={exampleFour}
+                     result= {obj}
+                  /> } 
             <Footer/>
          </div>  
     </div>

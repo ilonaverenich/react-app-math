@@ -2,8 +2,7 @@ import React, {useState} from 'react'
 import { Input, Button, message} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserValue2, getUserValue1} from '../../../../redux/actions/getUserValueAction';
-/* import {getRandomCount} from '../../../../redux/actions/setRandomValue'; */
-import{getStatusFirstInput, getStatusSecondInput} from '../../../../redux/actions/stateAction'
+import {getStatusFirstInput, getStatusSecondInput} from '../../../../redux/actions/stateAction'
 import getRandom from '../../../Units/handleRandomValue';
 import {setCountNum } from '../../../../redux/actions/setTextAction'
 
@@ -23,97 +22,86 @@ function Average(props) {
   
   let allRes = error+success;
 
-function getInputValue1 (e){
-  dispatch(getUserValue1(e.target.value))
-   setValueInput1(e.target.value)
+  function getInputValue1 (e){
+    dispatch(getUserValue1(e.target.value))
+    setValueInput1(e.target.value)
+  }
 
-}
-function getInputValue2 (e){
-  dispatch(getUserValue2(e.target.value))
-  setValueInput2(e.target.value)
-}
-function handleCalc() {
+  function getInputValue2 (e){
+    dispatch(getUserValue2(e.target.value))
+    setValueInput2(e.target.value)
+  }
 
-  valueInput1 == props.result.resVal1 ?dispatch(getStatusFirstInput(false)):dispatch(getStatusFirstInput(true))
+  function handleCalc() {
 
-  valueInput2 == props.result.resVal2 ?dispatch(getStatusSecondInput(false)):(dispatch(getStatusSecondInput(true)))
+    valueInput1 == props.result.resVal1 ? dispatch(getStatusFirstInput(false)):dispatch(getStatusFirstInput(true))
 
-  if ( valueInput1 == props.result.resVal1 &&  valueInput2 == props.result.resVal2 ){
-    message.success('Верно')  
-    dispatch(setCountNum(getRandom(max))) 
-    setSuccess(success+1)
-    setValueInput1('')
-    setValueInput2('')
+    valueInput2 == props.result.resVal2 ? dispatch(getStatusSecondInput(false)):(dispatch(getStatusSecondInput(true)))
+
+    if ( valueInput1 == props.result.resVal1 &&  valueInput2 == props.result.resVal2 ){
+      message.success('Верно')  
+      dispatch(setCountNum(getRandom(max))) 
+      setSuccess(success+1)
+      setValueInput1('')
+      setValueInput2('')
+    }
+    else {
+      setError(error+1)
+      message.error('Ошибка! Проверьте введенные данные еще раз!')
+      }
+  }
+
+  function toSummarize(){
+    message.info({
+      className:'cusstom-class',
+      content: `Всего попыток: ${allRes}. Из них правильных -  ${success} - ${(success/allRes*100).toFixed(1)}%, неправильных -  ${error} - ${(error/allRes*100).toFixed(1)}%`,
+      duration:4
+    })
 
   }
-  else {
-
-    setError(error+1)
-    message.error('Ошибка! Проверьте введенные данные еще раз!')
-
-    }
-}
-
-function toSummarize(){
-
-  message.info({
-    className:'cusstom-class',
-    content: `Всего попыток: ${allRes}. Из них правильных -  ${success} - ${(success/allRes*100).toFixed(1)}%, неправильных -  ${error} - ${(error/allRes*100).toFixed(1)}%`,
-    duration:4
-  })
-
-}
 
   return (
     <div className='content__block'>
         <div className='content__block_average_value'>
-
-          <div className='column_number'>
-          {data.count}  {props.exampleOne} =
-          </div>
-
+            <div className='column_number'>
+            {data.count}  {props.exampleOne} =
+            </div>
 
           <div className='column_value'>
-            <div >
-              <Input 
-              className='inputValue' 
-              value={valueInput1} 
-              status={state.getStatus1?'error':''} 
-              onChange={(e)=>getInputValue1(e)}/>
+              <div >
+                <Input 
+                  className='inputValue' 
+                  value={valueInput1} 
+                  status={state.getStatus1?'error':''} 
+                  onChange={(e)=>getInputValue1(e)}/>
+                {props.exampleTwo}
 
-              {props.exampleTwo}
-
-            </div>
+              </div>
           <div>
 
-            
             <Input 
-            className='inputValue' 
-            value={valueInput2} 
-            status={state.getStatus2?'error':''} 
-            onChange={(e)=>getInputValue2(e)} />
-            
+              className='inputValue' 
+              value={valueInput2} 
+              status={state.getStatus2?'error':''} 
+              onChange={(e)=>getInputValue2(e)} />
             {props.exampleTree} 
-
             </div>
           </div>
         </div>
 
-
         <div className='content__block_btn'>
-
              <Button 
-              type="primary" 
-              onClick={()=>handleCalc()} 
-              className='btn-check'>
-                Проверить
-                </Button>
+                type="primary" 
+                onClick={()=>handleCalc()} 
+                className='btn-check'>Проверить
+                  
+             </Button>
 
               <div className='box_btn'>
-              {(success>=1 || error>=1)?
-              <Button type='primary' 
-              className='btn-check res-btn' 
-               onClick={()=>toSummarize()}> Подвести итог </Button> : ""}
+                  {(success>=1 || error>=1)?
+                  <Button type='primary' 
+                  className='btn-check res-btn' 
+                  onClick={()=>toSummarize()}> Подвести итог </Button> : ""}
               </div>
             </div>
 

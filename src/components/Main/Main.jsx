@@ -5,34 +5,25 @@ import { Button, Radio, Select, Slider} from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {setArrowBack,getStatusFirstInput,getStatusSecondInput,getStatusThirdInput} from '../../redux/actions/stateAction';
 import getRandom from '../Units/handleRandomValue'
-import {getMaxCount} from '../../redux/actions/setRandomValue'
 import {changeMaxValue} from '../../redux/actions/getMaxValueAction'
-
-
 
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import style from './Main.module.less'
 
 function Main() {
-   const navigate = useNavigate();
-   const { Option } = Select;
    const dispatch = useDispatch();
    const data = useSelector((store) => store.data);   
-   /* const zzz = useSelector((store) => store.maxCount); */
+   const navigate = useNavigate();
+   const { Option } = Select;
    const [maxCount, setMaxCount] = useState(10)
 
-   
- 
    function handleFunc() {
       
+      let randomValue =  getRandom(maxCount)
       dispatch (setArrowBack(true))
-       let randomValue =  getRandom(maxCount)
       dispatch(setCountNum(randomValue)) 
-      dispatch(getMaxCount(maxCount)) 
       dispatch(changeMaxValue(maxCount))
-
-
       dispatch(getStatusFirstInput(false))
       dispatch(getStatusSecondInput(false))
       dispatch(getStatusThirdInput(false))
