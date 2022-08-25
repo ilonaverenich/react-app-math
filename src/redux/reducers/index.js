@@ -3,7 +3,6 @@ import textReducer from './setTextReducer';
 import getValueUser from './getUserValueReducer';
 import stateReducer from './stateReducer';
 import getMaxCountValue from './getMaxValueReducer'
-/* import setRandom from './setRandomValue'; */
 import setRandomUnit from './setRandomDataReducer';
 import resultReducer from './getResultValueReducer';
 
