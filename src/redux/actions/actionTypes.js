@@ -35,6 +35,9 @@ export const GET_STATUS_INPUT1 ='GET_STATUS_INPUT1';
 export const GET_STATUS_INPUT2 ='GET_STATUS_INPUT2';
 export const GET_STATUS_INPUT3 ='GET_STATUS_INPUT3';
 
+export const GET_STATE_RESULT = 'GET_STATE_RESULT';
+
+
 //храннение данных об оценки учащегося
 
 export const SAVE_DATA_GRADE = 'SAVE_DATA_GRADE';

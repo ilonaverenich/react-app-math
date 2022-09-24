@@ -2,9 +2,12 @@ import React, {useState} from 'react'
 import { Input, Button, message} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserValue2, getUserValue1, getUserValue3} from '../../../../redux/actions/getUserValueAction';
-import {getStatusFirstInput,getStatusSecondInput, getStatusThirdInput} from '../../../../redux/actions/stateAction';
+import {getStatusFirstInput,getStatusSecondInput, getStatusThirdInput,changeStateResult} from '../../../../redux/actions/stateAction';
+import {dataGrade} from '../../../../redux/actions/dataGradeAction'
 import getRandom from '../../../Units/handleRandomValue';
 import {setCountNum } from '../../../../redux/actions/setTextAction'
+import {calcProcent} from '../../resultGrade'
+import Grade from '../../../Grade';
 
 
 function Hard(props) {
@@ -19,6 +22,8 @@ function Hard(props) {
   const [valueInput3,setValueInput3] = useState('')
   const [success,setSuccess] = useState(0)
   const [error,setError] = useState(0);
+
+  const grade = useSelector((store)=>store.grade)
 
   let allRes = error + success;
 
@@ -35,6 +40,7 @@ function Hard(props) {
     dispatch(getUserValue3(e.target.value))
     setValueInput3(e.target.value)
   }
+  dispatch(dataGrade({success,error}))
   function handleCalc(){
 
       valueInput1 == props.result.resVal1 ?dispatch(getStatusFirstInput(false)):dispatch(getStatusFirstInput(true))
@@ -44,8 +50,7 @@ function Hard(props) {
       valueInput3 == props.result.resVal3 ?dispatch(getStatusThirdInput(false)):(dispatch(getStatusThirdInput(true)))
 
       if ( valueInput1 == props.result.resVal1 &&  valueInput2 == props.result.resVal2 && valueInput3 == props.result.resVal3){
-        console.log('Правильный ответ', props.result)
-        message.success('Верно')
+
         setSuccess(success+1)
         dispatch(setCountNum(getRandom(max))) 
         setValueInput1('')
@@ -54,12 +59,14 @@ function Hard(props) {
       }
       else{
         setError(error+1)
-        message.error('Ошибка! Проверьте введенные данные еще раз!')
+
       }
 
     }
     
   function toSummarize(){
+    calcProcent(grade)
+    dispatch(changeStateResult(true))
       dispatch(getStatusFirstInput(false))
       dispatch(getStatusSecondInput(false))
         message.info({
@@ -124,7 +131,7 @@ function Hard(props) {
        {(success>=1 || error>=1)?<Button type='primary' className='btn-check res-btn'  onClick={()=>toSummarize()} >Подвести итог</Button>:""}
     </div>
    </div>
-
+    {state.resultState?<Grade/>:''}
     <div className='content__block_info'>
       <p>Количество правильных ответов: <span className='count'>{success}</span> </p>
       <p>Количество неправильных ответов:<span className='count'> {error}</span></p>

@@ -2,10 +2,12 @@ import React, {useState} from 'react'
 import { Input, Button, message} from 'antd';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserValue2, getUserValue1} from '../../../../redux/actions/getUserValueAction';
-import {getStatusFirstInput, getStatusSecondInput} from '../../../../redux/actions/stateAction'
+import {getStatusFirstInput, getStatusSecondInput,changeStateResult} from '../../../../redux/actions/stateAction'
 import getRandom from '../../../Units/handleRandomValue';
 import {setCountNum } from '../../../../redux/actions/setTextAction'
-
+import Grade from '../../../Grade';
+import {dataGrade} from '../../../../redux/actions/dataGradeAction'
+import {calcProcent} from '../../resultGrade'
 
 function Average(props) {
 
@@ -19,7 +21,9 @@ function Average(props) {
   const [valueInput2,setValueInput2] = useState('')
   const [success,setSuccess] = useState(0)
   const [error,setError] = useState(0)
-  
+
+  const grade = useSelector((store)=>store.grade)
+
   let allRes = error+success;
 
   function getInputValue1 (e){
@@ -31,15 +35,15 @@ function Average(props) {
     dispatch(getUserValue2(e.target.value))
     setValueInput2(e.target.value)
   }
-
+    dispatch(dataGrade({success,error}))
   function handleCalc() {
-
+    dispatch(changeStateResult(false))
     valueInput1 == props.result.resVal1 ? dispatch(getStatusFirstInput(false)):dispatch(getStatusFirstInput(true))
 
     valueInput2 == props.result.resVal2 ? dispatch(getStatusSecondInput(false)):(dispatch(getStatusSecondInput(true)))
 
     if ( valueInput1 == props.result.resVal1 &&  valueInput2 == props.result.resVal2 ){
-      message.success('Верно')  
+
       dispatch(setCountNum(getRandom(max))) 
       setSuccess(success+1)
       setValueInput1('')
@@ -47,11 +51,12 @@ function Average(props) {
     }
     else {
       setError(error+1)
-      message.error('Ошибка! Проверьте введенные данные еще раз!')
       }
   }
 
   function toSummarize(){
+    calcProcent(grade)
+    dispatch(changeStateResult(true))
     message.info({
       className:'cusstom-class',
       content: `Всего попыток: ${allRes}. Из них правильных -  ${success} - ${(success/allRes*100).toFixed(1)}%, неправильных -  ${error} - ${(error/allRes*100).toFixed(1)}%`,
@@ -104,12 +109,12 @@ function Average(props) {
                   onClick={()=>toSummarize()}> Подвести итог </Button> : ""}
               </div>
             </div>
-
+            {state.resultState?<Grade/>:''}
         <div className='content__block_info'>
                 <p>Количество правильных ответов: <span className='count'>{success}</span> </p>
                 <p>Количество неправильных ответов:<span className='count'>{error}</span></p>
         </div>
-
+       
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Radio, Select, Slider} from 'antd';
 import { useNavigate } from 'react-router-dom';
-import {setArrowBack,getStatusFirstInput,getStatusSecondInput,getStatusThirdInput} from '../../redux/actions/stateAction';
+import {setArrowBack,getStatusFirstInput,getStatusSecondInput,getStatusThirdInput,changeStateResult} from '../../redux/actions/stateAction';
 import getRandom from '../Units/handleRandomValue'
 import {changeMaxValue} from '../../redux/actions/getMaxValueAction'
 
@@ -21,6 +21,7 @@ function Main() {
    function handleFunc() {
       
       let randomValue =  getRandom(maxCount)
+      dispatch(changeStateResult(false))
       dispatch (setArrowBack(true))
       dispatch(setCountNum(randomValue)) 
       dispatch(changeMaxValue(maxCount))
