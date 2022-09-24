@@ -5,6 +5,10 @@ import { getUserValue1} from '../../../../redux/actions/getUserValueAction';
 import {getStatusFirstInput} from '../../../../redux/actions/stateAction';
 import getRandom from '../../../Units/handleRandomValue';
 import {setCountNum } from '../../../../redux/actions/setTextAction'
+import {dataGrade} from '../../../../redux/actions/dataGradeAction'
+import {calcProcent} from '../../resultGrade'
+import {rez} from '../../resultGrade'
+
 
 function Easy (props) {
     const dispatch = useDispatch();
@@ -12,13 +16,16 @@ function Easy (props) {
     const [valueInput,setValueInput] = useState('')
     const [success,setSuccess] = useState(0)
     const [error,setError] = useState(0)
+    const [stateValue,setStateValue] = useState(false)
 
     const user = useSelector((store)=> store.userValue)
     const data = useSelector((store)=>store.data)
     const state = useSelector((store)=>store.state)
     const max = useSelector((store)=>store.max)
 
+    const grade = useSelector((store)=>store.grade)
     let allRes = error+success;
+  
 
    function getInputValue (e){
       dispatch(getUserValue1(e.target.value))
@@ -26,6 +33,8 @@ function Easy (props) {
     }
   
     function handleCalc(){
+      
+      setStateValue(false)
        if (user.userValue1 == props.result.resVal1){
             message.success('Верно!')
             setValueInput('')
@@ -36,14 +45,18 @@ function Easy (props) {
       else {
             message.error('Попробуй еще раз')
             dispatch(getStatusFirstInput(true))
-            setError(error+1)
+            setError(error+1)   
       }
     }
 
     function toSummarize(){
+      setStateValue(true)
+      dispatch(dataGrade({success,error}))
+      calcProcent(grade)
+      console.log('rfdgfr'+grade)
       message.info({
         className:'cusstom-class',
-        content: `Всего попыток: ${allRes}. Из них правильных -  ${success} - ${(success/allRes*100).toFixed(1)}%, неправильных -  ${error} - ${(error/allRes*100).toFixed(1)}%`,
+        content: `Ваша оценка: ${rez} : Всего попыток: ${allRes}. Из них правильных -  ${success} - ${(success/allRes*100).toFixed(1)}%, неправильных -  ${error} - ${(error/allRes*100).toFixed(1)}%`,
         duration:4
       })
     }
@@ -79,8 +92,11 @@ function Easy (props) {
               <div className='box_btn'>
               {(success>=1 || error>=1)?<Button type='primary' className='btn-check res-btn'  onClick={()=>toSummarize()}>Подвести итог</Button>:""}
               </div>
+               
         </div>
-
+              {stateValue?<div className='content__block_grade'>
+                  <p>Ваша оценка: <span className='grade'>{rez}</span></p>  
+               </div>:''}
         <div className='content__block_info'>
                 <p>Количество правильных ответов: <span className='count'>{success}</span> </p>
                 <p>Количество неправильных ответов:<span className='count'> {error}</span></p>

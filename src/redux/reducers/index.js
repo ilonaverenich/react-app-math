@@ -5,6 +5,7 @@ import stateReducer from './stateReducer';
 import getMaxCountValue from './getMaxValueReducer'
 import setRandomUnit from './setRandomDataReducer';
 import resultReducer from './getResultValueReducer';
+import getDataGrade from './dataGradeReducer';
 
 
 
@@ -14,5 +15,6 @@ export default combineReducers ({
    state : stateReducer,
    unit: setRandomUnit,
    result: resultReducer,
-   max: getMaxCountValue
+   max: getMaxCountValue,
+   grade: getDataGrade
 } )
