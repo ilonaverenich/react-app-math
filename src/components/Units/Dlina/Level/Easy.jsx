@@ -7,7 +7,8 @@ import getRandom from '../../../Units/handleRandomValue';
 import {setCountNum } from '../../../../redux/actions/setTextAction'
 import {dataGrade} from '../../../../redux/actions/dataGradeAction'
 import {calcProcent} from '../../resultGrade'
-import {rez} from '../../resultGrade'
+
+import Grade from '../../../Grade';
 
 
 function Easy (props) {
@@ -31,9 +32,10 @@ function Easy (props) {
       dispatch(getUserValue1(e.target.value))
       setValueInput(e.target.value) 
     }
-  
+    dispatch(dataGrade({success,error}))
+
+
     function handleCalc(){
-      
       setStateValue(false)
        if (user.userValue1 == props.result.resVal1){
             message.success('Верно!')
@@ -51,13 +53,12 @@ function Easy (props) {
 
     function toSummarize(){
       setStateValue(true)
-      dispatch(dataGrade({success,error}))
+     
       calcProcent(grade)
-      console.log('rfdgfr'+grade)
       message.info({
         className:'cusstom-class',
-        content: `Ваша оценка: ${rez} : Всего попыток: ${allRes}. Из них правильных -  ${success} - ${(success/allRes*100).toFixed(1)}%, неправильных -  ${error} - ${(error/allRes*100).toFixed(1)}%`,
-        duration:4
+        content: `Всего попыток: ${allRes}. Из них правильных -  ${success} - ${(success/allRes*100).toFixed(1)}%, неправильных -  ${error} - ${(error/allRes*100).toFixed(1)}%`,
+        duration:2
       })
     }
     
@@ -94,9 +95,7 @@ function Easy (props) {
               </div>
                
         </div>
-              {stateValue?<div className='content__block_grade'>
-                  <p>Ваша оценка: <span className='grade'>{rez}</span></p>  
-               </div>:''}
+              {stateValue?<Grade/>:''}
         <div className='content__block_info'>
                 <p>Количество правильных ответов: <span className='count'>{success}</span> </p>
                 <p>Количество неправильных ответов:<span className='count'> {error}</span></p>
